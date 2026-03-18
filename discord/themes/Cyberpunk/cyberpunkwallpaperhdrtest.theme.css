@@ -1,57 +1,40 @@
 /**
- * @name Cyberpunk Wallpaper HDR Test 2
- * @version 1.0.6.3
- * @description A translucent/frosted glass Discord theme
- * @author CapnKitten
- * @website http://github.com/CapnKitten
- * @source https://github.com/CapnKitten/BetterDiscord/blob/master/Themes/Translucence/css/source.css
- * @donate https://paypal.me/capnkitten
- * @invite jzJkA6Z
- * @BDEditor Translucence
+ * @name Cyberpunk Netrunner PRO
+ * @version 4.0.0
+ * @description Interface Holographique, Menus Fixés, Animations Fluides.
+ * @author LifeStealFR
+ * @source https://github.com/LifeStealFR/LifeSteal/blob/main/discord/themes/Cyberpunk/source.css
+ * @invite 3vMguzZFbJ
 */
 
 @import url('https://raw.githubusercontent.com/LifeStealFR/LifeSteal/refs/heads/main/discord/themes/Cyberpunk/source.css');
 
 :root {
+  /* ==============================================
+     1. FOND D'ÉCRAN
+     ============================================== */
   --app-bg: url('https://iili.io/qhYTt6u.png');
-  --app-blur: 6px;
-  --app-margin: 24px;
-  --app-radius: 8px;
-  --accent-hue: 184;
-  --accent-saturation: 77%;
-  --accent-lightness: 47%;
-  --accent-opacity: 1;
-  --sidebar-color: rgba(0,0,0,0.4);
-  --main-content-color: rgba(0,0,0,0.2);
-  --undefined: 0;
-  --interactive-normal: #aaa;
-  --interactive-hover: #ddd;
-  --interactive-active: #fff;
-  --interactive-muted: #777;
-  --undefined: 0;
-  --background-modifier-hover: rgba(255,255,255,0.075);
-  --background-modifier-selected: rgba(255,255,255,0.125);
-  --message-color: rgba(0,0,0,0.4);
-  --message-radius: 8px;
-  --message-padding-top: 8px;
-  --message-padding-side: 8px;
-  --undefined: 0;
-  --reply-hue: 226;
-  --reply-saturation: 77%;
-  --reply-lightness: 61%;
-  --reply-opacity: 1;
-  --textarea-color: 255,255,255;
-  --textarea-alpha: 0.1;
-  --textarea-alpha-focus: 0.15;
-  --textarea-radius: 22px;
-  --card-color: rgba(0,0,0,0.4);
-  --card-color-hover: rgba(0,0,0,0.5);
-  --card-color-select: rgba(0,0,0,0.7);
-  --button-height: 32px;
-  --button-padding: 0 16px;
-  --button-radius: 16px;
+
+  /* Flou du fond d'écran (0 = net, parfait pour voir l'image | 10 = flou) */
+  --app-blur: 3px; 
+
+  /* ==============================================
+     2. GESTION DES VITRES (HUD)
+     ============================================== */
+  /* Opacité des zones noires. 
+     0 = transparent / 1 = complètement noir */
+  --main-content-opacity: 0.45;
+  --sidebar-opacity: 0.65;
+
+  /* ==============================================
+     3. GESTION DES NÉONS (COULEURS)
+     ============================================== */
+  /* Cyan Principal (Boutons, Salons, Menus) */
+  --accent-hue: 188; 
+
+  /* Magenta Alerte (Ping, Messages non lus, Mentions) */
+  --alert-hue: 346;  
+
+  /* Jaune Corpo (Barre "Nouveaux messages" dans le chat) */
+  --reply-hue: 56;   
 }
-
-/* Any custom CSS below here */
-
-
