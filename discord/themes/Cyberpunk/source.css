@@ -1,203 +1,183 @@
 /*
  * ========================================================
- * NOM : Cyberpunk OS - OVERDRIVE
- * AUTEUR : LifeStealFR x AI
- * DESCRIPTION : Structure détruite, Panneaux flottants, Néon pur.
+ * NOM : Cyberpunk OS - NETRUNNER PRO
+ * AUTEUR : LifeStealFR
+ * DESCRIPTION : Interface Holographique, Glitch Animations, Menus Terminaux.
  * ========================================================
  */
 
 @import url('https://raw.githubusercontent.com/CapnKitten/BetterDiscord/master/Themes/Translucence/css/source.css');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
 
 :root {
-  /* ================= COULEURS NÉON PURES ================= */
+  /* ================= COULEURS NÉON (HUD) ================= */
   --accent-hue: 188; /* Cyber Cyan */
   --accent-saturation: 100%;
   --accent-lightness: 50%;
-  --accent-opacity: 1;
 
-  --alert-hue: 346; /* Neon Pink */
+  --alert-hue: 346; /* Neon Pink / Alert */
   --alert-saturation: 100%;
   --alert-lightness: 54%;
   
-  --reply-hue: 56; /* Yellow Corpo */
+  --reply-hue: 56; /* Corpo Yellow */
   --reply-saturation: 100%;
   --reply-lightness: 50%;
 
-  /* ================= VERRE LUMINEUX (FINI LE NOIR) ================= */
-  /* Teinte Cyan foncée/lumineuse très Sci-Fi, plus du tout sombre */
-  --main-rgb: 0, 70, 100;
-  --main-content-opacity: 0.25; /* Opacité très légère pour bien voir le wallpaper */
-  --sidebar-opacity: 0.35;
+  /* ================= VERRE HOLOGRAPHIQUE ================= */
+  --main-rgb: 4, 10, 15; /* Bleu nuit abyssal / Terminal noir */
+  --main-content-opacity: 0.45;
+  --sidebar-opacity: 0.65;
+
+  /* ================= GÉOMÉTRIE ET LIGNES ================= */
+  --app-radius: 0px; /* Bords stricts */
+  --message-radius: 4px;
+  --button-radius: 2px;
+  --card-radius: 4px;
   
-  /* Textes éclatants */
-  --text-normal: #e0f8ff;
-  --header-primary: #00f0ff;
-  --interactive-normal: #8ab4f8;
-  --interactive-hover: #00f0ff;
-  --interactive-active: #fff;
-
-  /* Formes brutes */
-  --app-radius: 0px;
-  --app-margin: 15px;
+  /* Scrollbars "Laser" */
+  --scrollbar-color: 0, 240, 255;
+  --scrollbar-opacity: 0.5;
+  --scrollbar-opacity-hover: 1;
+  --scrollbar-width: 4px;
 }
 
 /* ========================================================
-   1. DESTRUCTION DE LA STRUCTURE (PANNEAUX FLOTTANTS)
+   1. POLICES DE CARACTÈRES (HUD & CODE)
    ======================================================== */
-/* On détache les colonnes de Discord pour en faire des fenêtres HUD indépendantes */
-[class*="sidebar_"], 
-[class*="chat_"],[class*="membersWrap_"], 
-[class*="wrapper_"][aria-label="Serveurs"] {
-    margin: 8px !important;
-    background: rgba(0, 30, 50, 0.4) !important;
-    border: 1px solid rgba(0, 240, 255, 0.2) !important;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1), inset 0 0 15px rgba(0, 240, 255, 0.05);
-    border-radius: 0 !important;
-    backdrop-filter: blur(var(--app-blur));
-}
-
-/* Coupes Sci-Fi sur les panneaux flottants */[class*="sidebar_"] {
-    clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);
-}[class*="chat_"] {
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 25px 100%, 0 calc(100% - 25px));
-}
-[class*="membersWrap_"] {
-    clip-path: polygon(0 0, calc(100% - 25px) 0, 100% 25px, 100% 100%, 0 100%);
-}
-
-/* On enlève les vieux fonds Discord classiques qui reliaient tout */
-.appMount__51fd7 { background: var(--app-bg) center/cover no-repeat !important; }
-[class*="bg_"], [class*="app_"],[class*="base_"], [class*="pageWrapper_"] {
-    background: transparent !important;
-}
-
-/* ========================================================
-   2. POLICES DE CARACTÈRES HACKER / HUD
-   ======================================================== */
-/* Titres agressifs en Orbitron */
-[class*="name_"], [class*="title_"],[class*="headerText_"], h1, h2, h3 {
-    font-family: 'Orbitron', sans-serif !important;
-    letter-spacing: 1.5px;
+/* Titres de salons et headers */
+[class*="name_"], [class*="title_"], [class*="headerText_"], h1, h2 {
+    font-family: 'Rajdhani', sans-serif !important;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
-/* Textes techniques en Share Tech Mono */
-[class*="username_"], [class*="timestamp_"], code, [class*="placeholder_"], [class*="channelTextArea_"] {
-    font-family: 'Share Tech Mono', monospace !important;
-}
-
-/* ========================================================
-   3. LA ZONE DE CHAT (TERMINAL OVERRIDE)
-   ======================================================== */
-/* On transforme la zone pour taper les messages en console de commande */
-[class*="channelTextArea_"] {
-    background: rgba(0, 240, 255, 0.05) !important;
-    border: none !important;
-    border-bottom: 2px solid hsl(var(--accent-hue), 100%, 50%) !important;
-    border-left: 4px solid hsl(var(--alert-hue), 100%, 50%) !important;
-    border-radius: 0 !important;
-    margin-bottom: 15px;
-    box-shadow: inset 0 -10px 20px rgba(0, 240, 255, 0.05);
-    overflow: visible !important;
-}
-
-/* Ajout du faux texte "ROOT@NIGHTCITY" au-dessus de la barre de chat */
-[class*="form_"]::before {
-    content: "ROOT@NIGHTCITY:~/CONNECT$ _";
-    position: absolute;
-    top: -20px;
-    left: 20px;
-    color: hsl(var(--alert-hue), 100%, 50%);
-    font-family: 'Share Tech Mono', monospace;
-    font-size: 13px;
-    letter-spacing: 1px;
-    animation: blink 1s infinite;
+/* Code, pings et console de chat */
+[class*="unreadPill_"] span, code, [class*="placeholder_"],[class*="channelTextArea_"], [class*="autocomplete_"] {
+    font-family: 'JetBrains Mono', monospace !important;
 }
 
 /* ========================================================
-   4. DÉCORS HUD (CROSSHAIRS & BORDURES)
+   2. FIX : MENUS, AUTOCOMPLÉTION (@) & POPOUTS
    ======================================================== */
-/* Ajout de mires d'interface aux 4 coins du chat */
-[class*="chatContent_"]::before {
-    content: "";
-    position: absolute;
-    top: 10px; left: 10px; right: 10px; bottom: 10px;
-    border: 1px solid rgba(0, 240, 255, 0.15);
-    pointer-events: none;
-    z-index: 100;
-    clip-path: polygon(
-        0 20px, 20px 0, 100% 0, 100% 100%, 0 100%
-    );
+/* Les menus @, / et clics droits deviennent des terminaux lisibles et stylés */
+[class*="autocomplete_"],[class*="menu_"], [class*="popout_"], [class*="userPopoutOuter_"] {
+    background: rgba(4, 10, 15, 0.95) !important; /* Fond presque noir pour lisibilité parfaite */
+    border: 1px solid hsl(var(--accent-hue), 100%, 50%) !important;
+    box-shadow: 0 0 20px hsla(var(--accent-hue), 100%, 50%, 0.2), inset 0 0 10px hsla(var(--accent-hue), 100%, 50%, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 4px !important;
+    animation: hud-boot 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.1) forwards;
+    z-index: 9999 !important; /* Garde le menu toujours au-dessus */
 }
 
-/* ========================================================
-   5. EFFETS DE LUMIÈRE & SURVOLS (HOVER)
-   ======================================================== */
-/* Survol des salons = Scanner HUD */[class*="mainContent_"]:hover {
+/* Sélection dans le menu @ */
+[class*="autocompleteRow_"][aria-selected="true"] > div, 
+[class*="item_"][class*="focused_"] {
     background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.3) 0%, transparent 100%) !important;
-    border-left: 3px solid hsl(var(--accent-hue), 100%, 50%);
-    transform: translateX(5px);
+    border-left: 3px solid hsl(var(--accent-hue), 100%, 50%) !important;
+    padding-left: 8px !important;
+    transition: all 0.1s ease;
+}
+
+/* ========================================================
+   3. PANNEAUX FLOTTANTS & BORDURES HOLOGRAPHIQUES
+   ======================================================== */
+[class*="sidebar_"], [class*="chat_"],[class*="membersWrap_"], [class*="wrapper_"][aria-label="Serveurs"] {
+    margin: 6px !important;
+    border: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.15) !important;
+    box-shadow: inset 0 0 15px hsla(var(--accent-hue), 100%, 50%, 0.05);
+    background: rgba(4, 10, 15, var(--main-content-opacity)) !important;
+    border-radius: 4px !important;
+}
+
+/* ========================================================
+   4. ZONE DE CHAT "CONSOLE TERMINAL"
+   ======================================================== */
+[class*="channelTextArea_"] {
+    background: rgba(0, 0, 0, 0.4) !important;
+    border-top: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.3) !important;
+    border-bottom: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.3) !important;
+    border-radius: 0 !important;
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.05);
+    transition: 0.3s ease;
+}
+[class*="channelTextArea_"]:focus-within {
+    border-color: hsl(var(--accent-hue), 100%, 50%) !important;
+    background: rgba(0, 240, 255, 0.05) !important;
+    box-shadow: inset 0 0 20px hsla(var(--accent-hue), 100%, 50%, 0.15), 0 0 10px hsla(var(--accent-hue), 100%, 50%, 0.2);
+}
+
+/* ========================================================
+   5. ANIMATIONS GLOBALES ET ALERTES
+   ======================================================== */
+/* Boot HUD des menus */
+@keyframes hud-boot {
+    0% { opacity: 0; transform: translateY(10px) scale(0.98); filter: blur(5px); }
+    100% { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+}
+
+@keyframes neon-pulse {
+    0% { box-shadow: 0 0 5px hsla(var(--alert-hue), 100%, 50%, 0.5); }
+    50% { box-shadow: 0 0 15px hsla(var(--alert-hue), 100%, 50%, 1); }
+    100% { box-shadow: 0 0 5px hsla(var(--alert-hue), 100%, 50%, 0.5); }
+}
+
+/* Survol des salons (Hover Line) */[class*="mainContent_"] {
+    transition: all 0.2s ease-out;
+    border-left: 2px solid transparent;
+}
+.wrapper__7bc62:hover [class*="mainContent_"] {
+    transform: translateX(6px);
+    border-left: 2px solid hsl(var(--accent-hue), 100%, 50%);
+    background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.15) 0%, transparent 100%);
+}
+
+/* Salon sélectionné (Néon actif) */
+[class*="modeSelected_"] [class*="name_"] {
+    color: hsl(var(--accent-hue), 100%, 50%) !important;
+    text-shadow: 0 0 10px hsla(var(--accent-hue), 100%, 50%, 0.8);
+}[class*="modeSelected_"] [class*="mainContent_"] {
+    border-left: 2px solid hsl(var(--accent-hue), 100%, 50%);
+    background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.3) 0%, transparent 100%);
+}
+
+/* Alertes Mentions Rouges (Ping) */
+[class*="modeUnread_"] [class*="name_"] {
+    color: hsl(var(--alert-hue), 100%, 60%) !important;
+    text-shadow: 0 0 10px hsla(var(--alert-hue), 100%, 50%, 0.6);
+}
+[class*="unreadPill_"] {
+    background-color: hsl(var(--alert-hue), 100%, 50%) !important;
+    animation: neon-pulse 2s infinite;
+}
+
+/* Ligne de séparation des Nouveaux messages (Alerte Jaune) */[class*="isUnread__"], [class*="divider_"][class*="unreadPill_"] {
+    background: hsl(var(--reply-hue), 100%, 50%) !important;
+    box-shadow: 0 0 10px hsla(var(--reply-hue), 100%, 50%, 0.5);
+    border-radius: 0;
+}[class*="divider_"] span {
+    color: #000 !important;
+}
+
+/* Message Mentionné dans le chat */[class*="mentioned_"] {
+    background: linear-gradient(90deg, hsla(var(--alert-hue), 100%, 50%, 0.15) 0%, transparent 100%) !important;
+    border-left: 4px solid hsl(var(--alert-hue), 100%, 50%) !important;
+}[class*="mentioned_"]::before {
+    display: none; /* Supprime l'ancienne barre moche par défaut */
+}
+
+/* ========================================================
+   6. BOUTONS SCI-FI ET PROFILS UTILISATEUR
+   ======================================================== */
+button[class*="button_"] {
+    border-radius: 2px !important;
     transition: 0.2s ease;
 }
-
-/* Salon actuellement sélectionné */
-[class*="modeSelected_"] [class*="name_"] {
-    color: #fff !important;
-    text-shadow: 0 0 10px hsl(var(--accent-hue), 100%, 50%), 0 0 20px hsl(var(--accent-hue), 100%, 50%);
-}
-[class*="modeSelected_"] [class*="mainContent_"] {
-    background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.4) 0%, transparent 100%) !important;
-    border-left: 3px solid hsl(var(--accent-hue), 100%, 50%);
-}
-
-/* Mentions fluos */
-[class*="mentioned_"] {
-    background: hsla(var(--alert-hue), 100%, 50%, 0.15) !important;
-    border: 1px solid hsla(var(--alert-hue), 100%, 50%, 0.5) !important;
-}
-[class*="mentioned_"]::before {
-    background-color: hsl(var(--alert-hue), 100%, 50%) !important;
-    box-shadow: 0 0 20px hsl(var(--alert-hue), 100%, 50%);
-    width: 4px;
-}
-
-/* ========================================================
-   6. AVATARS & BOUTONS TAILLÉS À LA SERPE
-   ======================================================== */
-/* Avatars en losange/octogone agressif */[class*="avatar_"], img[class*="avatar_"] {
-    clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
-    border-radius: 0 !important;
-}
-foreignObject[mask] { mask: none !important; }
-
-/* Boutons de profil et d'interface en biseau */
-button {
-    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
-    border-radius: 0 !important;
-    transition: 0.2s;
-}
-button:hover {
+button[class*="button_"][class*="lookFilled_"]:hover {
     box-shadow: 0 0 15px hsla(var(--accent-hue), 100%, 50%, 0.6) !important;
-    background-color: hsla(var(--accent-hue), 100%, 50%, 0.2) !important;
+    background-color: hsla(var(--accent-hue), 100%, 60%, 1) !important;
+    transform: scale(1.02);
 }
 
-/* ========================================================
-   7. ANIMATIONS GLOBALES
-   ======================================================== */
-@keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
-}
-
-/* Barre de séparation Nouveaux Messages = Ligne de code corrompue */[class*="divider_"] {
-    border: none;
-    height: 1px;
-    background: hsl(var(--alert-hue), 100%, 50%);
-    box-shadow: 0 0 10px hsl(var(--alert-hue), 100%, 50%);
-}[class*="unreadPill_"] {
-    background: #000 !important;
-    border: 1px solid hsl(var(--alert-hue), 100%, 50%);
-    color: hsl(var(--alert-hue), 100%, 50%) !important;
-    font-family: 'Share Tech Mono', monospace;
-    clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
-}
+/* Cacher le vilain fond original Discord */
+.appMount__51fd7 { background: var(--app-bg) center/cover no-repeat !important; }
+[class*="bg_"],[class*="app_"] { background: transparent !important; }
