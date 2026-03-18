@@ -1,125 +1,234 @@
 /*
  * ========================================================
- * NOM : Cyberpunk Translucence UI Framework
- * AUTEUR : LifeStealFR
- * DESCRIPTION : Moteur CSS pour l'interface Cyberpunk.
+ * NOM : Cyberpunk OS - Netrunner Edition
+ * AUTEUR : LifeStealFR x AI
+ * DESCRIPTION : Moteur HUD animé, Glitches, CRT, et Néons.
  * ========================================================
  */
 
-/* 1. IMPORTATION DU MOTEUR TRANSLUCENCE (Base de verre fumé) */
 @import url('https://raw.githubusercontent.com/CapnKitten/BetterDiscord/master/Themes/Translucence/css/source.css');
-
-/* 2. IMPORTATION DES POLICES CYBERPUNK */
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
 
 :root {
-  /* --- COULEURS CYBERPUNK PAR DÉFAUT --- */
-  --accent-hue: 188; /* Cyber Cyan */
+  /* COULEURS NEON HDR */
+  --accent-hue: 188; 
   --accent-saturation: 100%;
   --accent-lightness: 50%;
   
-  --alert-hue: 346; /* Neon Pink (Mentions & Alertes) */
+  --alert-hue: 346; 
   --alert-saturation: 100%;
   --alert-lightness: 54%;
   
-  --reply-hue: 56; /* Corpo Yellow (Nouveau message) */
+  --reply-hue: 56; 
   --reply-saturation: 100%;
   --reply-lightness: 50%;
 
-  /* --- VERRE CORPO (Bleu nuit abyssal au lieu du noir basique) --- */
-  --main-rgb: 9, 13, 19;
-  --main-content-opacity: 0.35;
-  --sidebar-opacity: 0.55;
+  /* BASE HUD SOMBRE */
+  --main-rgb: 5, 8, 12;
+  --main-content-opacity: 0.45;
+  --sidebar-opacity: 0.65;
 
-  /* --- GÉOMÉTRIE SHARP (Angles bruts) --- */
-  --app-radius: 4px;
-  --message-radius: 4px;
-  --button-radius: 4px;
-  --card-radius: 4px;
-  --textarea-radius: 4px;
-  --input-radius: 4px;
+  /* GÉOMÉTRIE SCIFI (Désactivation des arrondis au profit du clip-path) */
+  --app-radius: 0px;
+  --message-radius: 0px;
+  --button-radius: 0px;
+  --card-radius: 0px;
+  --textarea-radius: 0px;
+  --input-radius: 0px;
 
-  /* --- BARRES DE DÉFILEMENT FINES --- */
+  /* SCROLLBARS CIRCUIT IMPRIMÉ */
   --scrollbar-color: 0, 240, 255;
-  --scrollbar-opacity: 0.3;
-  --scrollbar-opacity-hover: 0.8;
-  --scrollbar-width: 6px;
+  --scrollbar-opacity: 0.4;
+  --scrollbar-opacity-hover: 1;
+  --scrollbar-width: 4px;
 }
 
 /* ========================================================
-   INTERFACE UTILISATEUR (HUD) CUSTOM
+   1. OVERLAY CRT & SCANLINES (EFFET ÉCRAN HOLOGRAPHIQUE)
    ======================================================== */
+#app-mount::after {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.15) 50%), 
+                linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+    z-index: 9999;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+    animation: crt-flicker 0.15s infinite;
+}
 
-/* Typographie : Polices HUD sur l'interface, lisible sur les messages */
-[class*="name_"], [class*="title_"], [class*="headerText_"], [class*="button_"], [class*="username_"] {
+/* Ligne de balayage lumineuse (Scanner) */
+#app-mount::before {
+    content: " ";
+    display: block;
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 10px;
+    background: linear-gradient(to bottom, transparent, hsla(var(--accent-hue), 100%, 50%, 0.1), transparent);
+    z-index: 9998;
+    pointer-events: none;
+    animation: scanline 6s linear infinite;
+}
+
+/* ========================================================
+   2. ANIMATIONS & KEYFRAMES OVERKILL
+   ======================================================== */
+@keyframes scanline {
+    0% { transform: translateY(-10vh); }
+    100% { transform: translateY(110vh); }
+}
+
+@keyframes crt-flicker {
+    0% { opacity: 0.95; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+}
+
+@keyframes glitch-anim {
+    0% { clip-path: inset(10% 0 80% 0); transform: translate(-2px, 2px); }
+    20% { clip-path: inset(80% 0 5% 0); transform: translate(2px, -2px); }
+    40% { clip-path: inset(40% 0 40% 0); transform: translate(-2px, 1px); }
+    60% { clip-path: inset(90% 0 2% 0); transform: translate(2px, 1px); }
+    80% { clip-path: inset(20% 0 60% 0); transform: translate(-1px, -1px); }
+    100% { clip-path: inset(50% 0 30% 0); transform: translate(0); }
+}
+
+@keyframes hud-boot {
+    0% { opacity: 0; transform: scaleY(0.01) scaleX(0.8); filter: blur(10px); }
+    50% { opacity: 1; transform: scaleY(1.05) scaleX(1); filter: blur(2px); }
+    100% { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes pulse-neon {
+    0% { box-shadow: 0 0 5px hsla(var(--alert-hue), 100%, 50%, 0.5); opacity: 0.8; }
+    50% { box-shadow: 0 0 20px hsla(var(--alert-hue), 100%, 50%, 1); opacity: 1; }
+    100% { box-shadow: 0 0 5px hsla(var(--alert-hue), 100%, 50%, 0.5); opacity: 0.8; }
+}
+
+@keyframes border-dance {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ========================================================
+   3. TYPOGRAPHIE TERMINAL & HUD
+   ======================================================== */
+[class*="name_"], [class*="title_"], [class*="headerText_"],[class*="button_"], [class*="username_"] {
     font-family: 'Rajdhani', sans-serif !important;
-    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
-/* Badge et Code en police Hacker */
-[class*="unreadPill_"] span, code {
-    font-family: 'JetBrains Mono', monospace !important;
+[class*="unreadPill_"] span, code, [class*="timestamp_"] {
+    font-family: 'Share Tech Mono', monospace !important;
 }
 
-/* Boutons Biseautés (Beveled Edges) */
-button[class*="button_"][class*="lookFilled_"] {
-    clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);
-    transition: all 0.2s ease-in-out;
-}
-button[class*="button_"]:hover {
-    box-shadow: 0 0 12px hsla(var(--accent-hue), 100%, 50%, 0.4) !important;
-    transform: translateY(-1px);
+/* ========================================================
+   4. GÉOMÉTRIE BISEAUTÉE (CLIP-PATHS) : TOUT EST COUPÉ
+   ======================================================== */
+/* Boutons et menus */
+button, [class*="menu_"], [class*="popout_"], [class*="userPopout_"],[class*="tooltip_"] {
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+    border-radius: 0 !important;
 }
 
-/* Salons (Animations et Lignes LED) */[class*="mainContent_"] {
-    transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+/* Avatars Hexagonaux (Style Corpo) */[class*="wrapper_"][role="img"] foreignObject { mask: none; }
+[class*="wrapper_"][role="img"] img, [class*="avatar_"] {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    border-radius: 0 !important;
+}
+
+/* ========================================================
+   5. INTERACTIONS, GLITCHES & HOVERS
+   ======================================================== */
+/* Glitch sur les boutons au clic */
+button:active[class*="contents_"] {
+    animation: glitch-anim 0.2s cubic-bezier(.25, .46, .45, .94) both infinite;
+    color: hsl(var(--alert-hue), 100%, 50%) !important;
+}
+
+/* Boot HUD sur les menus contextuels (clic droit) */
+[class*="menu_"] {
+    animation: hud-boot 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    border: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.5);
+    background: rgba(5, 8, 12, 0.85) !important;
+}
+
+/* Animation des salons au survol (Scan effet) */[class*="mainContent_"] {
+    transition: all 0.2s ease-out;
     border-left: 2px solid transparent;
 }
-.wrapper__7bc62:hover [class*="mainContent_"] {
-    transform: translateX(4px);
-    border-left: 2px solid hsl(var(--accent-hue), 100%, 50%);
-    background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.1) 0%, transparent 100%);
-}
-
-/* Salons Actifs (Cyan Glow) */
-[class*="modeSelected_"][class*="name_"] {
-    color: hsl(var(--accent-hue), 100%, 50%) !important;
-    text-shadow: 0 0 10px hsla(var(--accent-hue), 100%, 50%, 0.5);
-    font-weight: 700;
-}[class*="modeSelected_"] [class*="mainContent_"] {
+.wrapper__7bc62:hover[class*="mainContent_"] {
+    transform: translateX(8px);
     border-left: 2px solid hsl(var(--accent-hue), 100%, 50%);
     background: linear-gradient(90deg, hsla(var(--accent-hue), 100%, 50%, 0.2) 0%, transparent 100%);
 }
 
-/* Mentions & Alertes (Pink Glow) */
-[class*="modeUnread_"] [class*="name_"] {
-    color: hsl(var(--alert-hue), 100%, 65%) !important;
-    text-shadow: 0 0 8px hsla(var(--alert-hue), 100%, 60%, 0.5);
+/* ========================================================
+   6. SALON ACTIF & TERMINAL BRACKETS
+   ======================================================== */
+[class*="modeSelected_"] [class*="name_"] {
+    color: hsl(var(--accent-hue), 100%, 50%) !important;
+    text-shadow: 0 0 12px hsla(var(--accent-hue), 100%, 50%, 0.8);
 }
-[class*="mentioned_"] {
-    background: linear-gradient(90deg, hsla(var(--alert-hue), 100%, 50%, 0.15) 0%, transparent 100%) !important;
+/* Ajout de crochets façon code [ SALON ] */
+[class*="modeSelected_"][class*="name_"]::before {
+    content: "[ "; color: #fff; font-family: 'Share Tech Mono'; font-weight: normal; opacity: 0.5;
+}
+[class*="modeSelected_"][class*="name_"]::after {
+    content: " ]_"; color: #fff; font-family: 'Share Tech Mono'; font-weight: normal; opacity: 0.5;
+    animation: crt-flicker 1s infinite;
+}
+
+/* ========================================================
+   7. ALERTES & NÉONS PULSANTS
+   ======================================================== */
+/* Ping rouge pulsant */
+[class*="modeUnread_"][class*="name_"] {
+    color: hsl(var(--alert-hue), 100%, 60%) !important;
+    text-shadow: 0 0 8px hsla(var(--alert-hue), 100%, 50%, 0.6);
+}
+[class*="unreadPill_"] {
+    animation: pulse-neon 2s infinite;
+    background-color: hsl(var(--alert-hue), 100%, 50%) !important;
+}
+
+/* Mention dans le chat (Gros HUD rouge) */[class*="mentioned_"] {
+    background: repeating-linear-gradient(45deg, hsla(var(--alert-hue), 100%, 50%, 0.05), hsla(var(--alert-hue), 100%, 50%, 0.05) 10px, transparent 10px, transparent 20px) !important;
+    border: 1px solid hsla(var(--alert-hue), 100%, 50%, 0.3);
+    clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }[class*="mentioned_"]::before {
     background-color: hsl(var(--alert-hue), 100%, 50%) !important;
-    box-shadow: 0 0 12px hsla(var(--alert-hue), 100%, 50%, 0.6);
-    width: 3px;
+    box-shadow: 0 0 15px hsla(var(--alert-hue), 100%, 50%, 1);
+    width: 4px;
 }
 
-/* Séparateur de Nouveaux Messages (Yellow Glow) */[class*="isUnread__"], [class*="unreadPill_"] {
-    background-color: hsl(var(--reply-hue), 100%, 50%) !important;
-    box-shadow: 0 0 8px hsla(var(--reply-hue), 100%, 50%, 0.5);
+/* ========================================================
+   8. HUD DE SAISIE (ZONE DE TEXTE)
+   ======================================================== */
+[class*="channelTextArea_"] {
+    border-top: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.3);
+    border-bottom: 1px solid hsla(var(--accent-hue), 100%, 50%, 0.3);
+    background: rgba(0, 240, 255, 0.02) !important;
+    clip-path: none; /* Reste rectangulaire pour le confort */
 }
-[class*="unreadPill_"] span {
-    color: #000 !important;
-    font-weight: 700;
+[class*="channelTextArea_"]:focus-within {
+    background: rgba(0, 240, 255, 0.05) !important;
+    box-shadow: inset 0 0 20px hsla(var(--accent-hue), 100%, 50%, 0.1);
+    border-color: hsl(var(--accent-hue), 100%, 50%);
 }
 
-/* Scrollbars High-Tech */
-::-webkit-scrollbar-thumb {
-    border-radius: 0 !important;
-    background-color: hsla(var(--accent-hue), 100%, 50%, var(--scrollbar-opacity)) !important;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: hsl(var(--alert-hue), 100%, 50%) !important;
-    box-shadow: 0 0 10px hsl(var(--alert-hue), 100%, 50%);
+/* ========================================================
+   9. SÉPARATEUR DE NOUVEAU MESSAGE (DANGER LINE)
+   ======================================================== */[class*="isUnread__"], [class*="divider_"] [class*="unreadPill_"] {
+    background: repeating-linear-gradient(-45deg, hsl(var(--reply-hue), 100%, 50%), hsl(var(--reply-hue), 100%, 50%) 10px, #000 10px, #000 20px) !important;
+    box-shadow: 0 0 15px hsla(var(--reply-hue), 100%, 50%, 0.6);
+    height: 12px;
+    border-radius: 0;
+    clip-path: polygon(5px 0, 100% 0, calc(100% - 5px) 100%, 0 100%);
+}[class*="divider_"] span {
+    display: none; /* On cache le texte pour juste laisser la barre de warning jaune/noire */
 }
