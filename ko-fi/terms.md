@@ -1,45 +1,51 @@
-# 📜 Charte & Licences d'Utilisation des Wallpapers
+# ⚖️ Licences & Conditions d'Utilisation des Ressources Numériques
+**Propriété de LifeStealFR / angmarroisorcie**
 
-Merci de soutenir mon travail ! Pour clarifier ce que vous pouvez faire avec mes créations (Cyberpunk, Castle, Minecraft, etc.), voici un récapitulatif selon le type d'acquisition.
+Merci de soutenir mes créations ! Ce document définit vos droits d'utilisation sur les fonds d'écran et ressources disponibles sur [ko-fi.com/lifestealfr](https://ko-fi.com/lifestealfr).
 
 ---
 
-### 📊 Comparatif des Droits d'Utilisation
+### 📊 Tableau Récapitulatif des Droits
 
-| Fonctionnalité | 🍃 Version Gratuite | 💎 Version Payante / Don |
+| Type d'Usage | 🍃 Licence Standard (Gratuit) | 💎 Licence Premium (Achat/Don) |
 | :--- | :---: | :---: |
-| **Usage Personnel (PC/Mobile)** | ✅ Oui | ✅ Oui (Haute Qualité) |
-| **Usage Stream (Twitch/YT)** | ✅ Oui | ✅ Oui |
-| **Usage Serveur (Discord/Web)** | ⚠️ Contact requis | ✅ Oui (Inclus) |
-| **Modifications Légères** | ❌ Non | ✅ Oui |
-| **Redistribution / Revente** | ❌ INTERDIT | ❌ INTERDIT |
-| **Usage Merch (T-shirt/etc.)** | ❌ Non | ❌ Accord requis |
+| **Usage Personnel (Wallpaper)** | ✅ Autorisé | ✅ Autorisé (HD/4K) |
+| **Usage Content Creator (Stream/YT)** | ✅ Autorisé | ✅ Autorisé |
+| **Usage Communautaire (Serveur/Discord)** | ⚠️ Autorisation requise | ✅ Autorisé |
+| **Modification / Retouche** | ❌ Interdit | ✅ Autorisé (Privé) |
+| **Redistribution / Partage de fichier** | ❌ STRICTEMENT INTERDIT | ❌ STRICTEMENT INTERDIT |
+| **Usage Commercial / Merchandising** | ❌ Interdit | ❌ Accord écrit requis |
 
 ---
 
-### 📥 Détails des Licences
+### 📝 1. Définitions des Licences
 
-#### 🍃 Version Gratuite (Standard)
-Cette licence s'applique si vous téléchargez un wallpaper gratuitement. 
-* L'usage est strictement réservé à votre cercle **privé**. 
-* Pour toute utilisation sur un projet public ou un serveur, une autorisation préalable est nécessaire.
+#### 🔹 Licence Standard (Acquisition Gratuite)
+Cette licence est accordée pour tout téléchargement à 0€. Elle est destinée à un usage **strictement privé et non lucratif**. 
+* Si vous souhaitez utiliser une ressource gratuite pour illustrer un projet public (Serveur Minecraft, Site Web), vous devez impérativement contacter `angmarroisorcie` sur Discord pour obtenir une validation.
 
-#### 💎 Version Payante ou Don (Premium)
-Cette licence s'applique pour tout achat direct ou pour tout don ("Tip") effectué sur un article Free+.
-* Vous soutenez directement la création et débloquez une liberté d'usage étendue (serveurs, bannières, etc.).
-* Le crédit vers **ko-fi.com/lifestealfr** est **apprécié** mais reste facultatif.
+#### 🔸 Licence Premium (Acquisition Payante ou Don)
+Cette licence est débloquée dès lors qu'un achat est effectué ou qu'un pourboire ("Tip") est ajouté, même sur un produit "Free+".
+* Elle vous donne le droit d'utiliser l'image pour vos infrastructures communautaires (Bannières de serveur, menus de jeu, réseaux sociaux liés au projet) sans demande préalable.
 
 ---
 
-### ❌ Règles Strictes (Toutes Versions)
-Peu importe le mode d'acquisition :
-1. **Pas de revente :** Interdiction formelle de vendre ces images.
-2. **Pas de redistribution :** Ne partagez pas les fichiers sources, redirigez les utilisateurs vers le Ko-fi.
-3. **Paternité :** Ne vous appropriez pas la création originale des visuels.
+### 🚫 2. Restrictions Strictes (Toutes Licences)
+Il est formellement interdit de :
+* **Revente :** Vendre les fichiers, que ce soit sous leur forme originale ou modifiée.
+* **Extraction :** Utiliser des éléments isolés de mes créations pour les intégrer dans d'autres œuvres destinées à la vente.
+* **Hébergement tiers :** Uploader mes fichiers sur d'autres plateformes (Mediafire, Mega, autres boutiques). Redirigez toujours vers le Ko-fi officiel.
+* **IA Training :** L'utilisation de ces images pour entraîner des modèles d'intelligence artificielle est interdite.
 
 ---
 
-### 📩 Contact & Commandes
-Pour une licence commerciale spécifique, une édition limitée ou une création sur mesure :
+### 💡 3. Attribution & Crédits
+* **Usage Privé :** Aucun crédit n'est requis.
+* **Usage Public (Serveur/Vidéo) :** Mentionner **"Artwork par LifeStealFR"** avec un lien vers le Ko-fi est grandement apprécié et aide à soutenir mon travail.
+
+---
+
+### 📩 Support & Contact
+Pour toute question, demande de partenariat ou commande de wallpaper personnalisé (exclusif) :
 * **Discord :** `angmarroisorcie`
-* **Ko-fi :** [ko-fi.com/lifestealfr](https://ko-fi.com/lifestealfr)
+* **Serveur Discord :** [discord.gg/3vMguzZFbJ](https://discord.gg/3vMguzZFbJ)
