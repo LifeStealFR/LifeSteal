@@ -1,5 +1,5 @@
 # ⚖️ Licences & Conditions d'Utilisation des Ressources Numériques
-**Propriété de LifeStealFR / angmarroisorcie**
+**Propriété de LifeStealFR / [Contacter le Staff](https://lifestealfr.github.io/ko-fi/staff)**
 
 Merci de soutenir mes créations ! Ce document définit vos droits d'utilisation sur les fonds d'écran et ressources disponibles sur [ko-fi.com/lifestealfr](https://ko-fi.com/lifestealfr).
 
