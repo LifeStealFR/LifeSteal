@@ -11,7 +11,7 @@ Besoin d'aide, d'une licence spécifique ou d'une commande personnalisée ? Voic
 
 ### 🛡️ Administration Générale
 * **Pseudo Discord :** `saguasay`
-* **Pseudo Minecraft :** `𝟎x_𝑺͢𝐚͢𝐠͢𝐮͢𝐚͢𝐬͢𝐚͢𝐲͢`
+* **Pseudo Minecraft :** `0x_Saguasay`
 * **Rôle :** Administrateur Réseau & Support
 
 ---
