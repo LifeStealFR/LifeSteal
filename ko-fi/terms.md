@@ -22,7 +22,7 @@ Merci de soutenir mes créations ! Ce document définit vos droits d'utilisation
 
 #### 🔹 Licence Standard (Acquisition Gratuite)
 Cette licence est accordée pour tout téléchargement à 0€. Elle est destinée à un usage **strictement privé et non lucratif**. 
-* Si vous souhaitez utiliser une ressource gratuite pour illustrer un projet public (Serveur Minecraft, Site Web), vous devez impérativement contacter `angmarroisorcie` sur Discord pour obtenir une validation.
+* Si vous souhaitez utiliser une ressource gratuite pour illustrer un projet public (Serveur Minecraft, Site Web), vous devez impérativement [Contacter le Staff](https://lifestealfr.github.io/ko-fi/staff) sur Discord pour obtenir une validation.
 
 #### 🔸 Licence Premium (Acquisition Payante ou Don)
 Cette licence est débloquée dès lors qu'un achat est effectué ou qu'un pourboire ("Tip") est ajouté, même sur un produit "Free+".
@@ -47,5 +47,5 @@ Il est formellement interdit de :
 
 ### 📩 Support & Contact
 Pour toute question, demande de partenariat ou commande de wallpaper personnalisé (exclusif) :
-* **Discord :** `angmarroisorcie`
+* **Discord :** [Contacter le Staff](https://lifestealfr.github.io/ko-fi/staff)
 * **Serveur Discord :** [discord.gg/3vMguzZFbJ](https://discord.gg/3vMguzZFbJ)
