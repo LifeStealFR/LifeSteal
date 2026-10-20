@@ -1,165 +1,233 @@
 /**
- * @name Oshi no Ko 【推しの子】 - Starry Idol Translucence
- * @author CapnKitten (Base Translucence) & Custom Oshi no Ko Edition
- * @version 3.0.0
- * @description Thème Vencord ultra-complet basé sur Translucence. Correctifs complets UI, Liquid Glass, dualité Aqua/Ruby et étoile Hoshino.
+ * @name 【推しの子】 Ichigo Production - Official License UI
+ * @author CapnKitten (Base Translucence) & Ichigo Production Edition
+ * @version 4.0.0
+ * @description Refonte totale inspirée du site officiel ichigoproduction.com : Noir Obsidienne, Trame Halftone, Crochets 【】, Logo SVG Officiel & Chromatic Split.
  * @source https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css
  */
 
 /* ==========================================================================
-   1. IMPORTS OBLIGATOIRES (BASE TRANSLUCENCE + POLICE)
+   1. IMPORTS (BASE TRANSLUCENCE + POLICES OFFICIELLES JAPONAISES/DISPLAY)
    ========================================================================== */
 @import url("https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css");
-@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;0,900;1,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap");
 
 /* ==========================================================================
-   2. VARIABLES GLOBALES TRANSLUCENCE & PALETTE OSHI NO KO
+   2. PALETTE & SUPPRESSION DU VOILE GRIS DE TRANSLUCENCE
    ========================================================================== */
 :root {
-  /* --- PALETTE OFFICIELLE OSHI NO KO --- */
-  --onk-ai-magenta: #ff2a85;
-  --onk-ruby-pink: #ff66b2;
-  --onk-aqua-cyan: #00e5ff;
-  --onk-star-gold: #ffd700;
-  --onk-purple-glow: #9d4edd;
+  /* --- COULEURS OFFICIELLES ICHIGO PRODUCTION (ichigoproduction.com) --- */
+  --ichigo-magenta: #e5007f;       /* Rose officiel du logo 【推しの子】 */
+  --ichigo-neon-pink: #ff1493;     /* Rose scène B-Komachi */
+  --ichigo-cyan: #00f0ff;          /* Cyan Aqua / Aberration chromatique */
+  --ichigo-gold: #ffe600;          /* Jaune/Or Ruby & MEM-cho */
+  --ichigo-violet: #7b2cbf;        /* Violet étoilé Ai Hoshino */
+  --ichigo-obsidian: #080411;      /* Noir-Violet profond du site officiel */
+  --ichigo-panel: rgba(10, 5, 22, 0.82);
 
-  /* --- WALLPAPERS 16:9 WIDESCREEN HD/4K (Sans zoom flou !) ---
-   * Choix 1 (Par défaut - Ai Hoshino Yeux Étoilés 4K 16:9) : url(https://w.wallhaven.cc/full/85/wallhaven-85dwdk.jpg)
-   * Choix 2 (Ai Hoshino Scène de Concert 4K 16:9)          : url(https://w.wallhaven.cc/full/qz/wallhaven-qzkz3r.png)
-   * Choix 3 (Akane Kurokawa Yeux Étoilés 1080p 16:9)       : url(https://w.wallhaven.cc/full/85/wallhaven-85vkyj.png)
-   * Choix 4 (Ai, Aqua & Ruby Hoshino 1080p 16:9)           : url(https://w.wallhaven.cc/full/k8/wallhaven-k82qqq.png)
+  /* --- VISUELS OFFICIELS (Avec assombrissement automatique intégré plus bas) ---
+   * 1. Visuel Officiel ichigoproduction.com (OGP) : url(https://ichigoproduction.com/core_sys/images/others/ogp.jpg)
+   * 2. Visuel Officiel Saison 2 (ichigoproduction): url(https://ichigoproduction.com/Season2/core_sys/images/main/home/kv02.jpg)
+   * 3. Visuel Officiel Saison 4 (ichigoproduction): url(https://ichigoproduction.com/Season4/core_sys/images/main/home/kv4th-01.jpg)
+   * 4. Ai Hoshino Concert 4K 16:9                 : url(https://w.wallhaven.cc/full/qz/wallhaven-qzkz3r.png)
+   * 5. Ai Hoshino Starry Eyes 4K 16:9             : url(https://w.wallhaven.cc/full/85/wallhaven-85dwdk.jpg)
    */
-  --app-bg: url(https://w.wallhaven.cc/full/85/wallhaven-85dwdk.jpg);
-  --app-blur: 3.5px; /* Flou réduit pour garder la netteté 4K du fond */
-  --app-margin: 16px;
-  --app-radius: 20px;
+  --app-bg: url(https://w.wallhaven.cc/full/qz/wallhaven-qzkz3r.png);
+  --app-blur: 2px;
+  --app-margin: 14px;
+  --app-radius: 10px; /* Angles plus vifs et graphiques comme sur ichigoproduction.com */
 
-  /* Teinte principale : Violet nocturne profond mais plus transparent */
-  --main-rgb: 12, 5, 24;
-  --main-content-opacity: 0.32;
-  --sidebar-opacity: 0.44;
+  /* --- CORRECTION MAJEURE : FINI LE VOILE GRIS LAITEUX DE TRANSLUCENCE --- */
+  --main-rgb: 8, 4, 17;
+  --main-content-opacity: 0.72;
+  --sidebar-opacity: 0.84;
   --main-content-color: rgba(var(--main-rgb), var(--main-content-opacity));
   --sidebar-color: rgba(var(--main-rgb), var(--sidebar-opacity));
 
-  /* --- ACCENTUATION PRINCIPALE (Rose/Magenta Ai Hoshino) --- */
-  --accent-hue: 334;
-  --accent-saturation: 95%;
-  --accent-lightness: 60%;
+  /* C'est CETTE variable qui rendait tout ton Discord gris/rose délavé ! */
+  --liquid-glass-color-subtle: rgba(9, 4, 19, 0.78) !important;
+  --liquid-glass-saturation: 130%;
+  --liquid-glass-shadow: 
+    inset 0 0 0 1px rgba(229, 0, 127, 0.28),
+    inset 0 1px 0 0 rgba(0, 240, 255, 0.22),
+    0 10px 30px rgba(0, 0, 0, 0.8) !important;
+
+  /* --- ACCENTUATIONS & BOUTONS --- */
+  --accent-hue: 327;
+  --accent-saturation: 100%;
+  --accent-lightness: 45%;
   --accent-hsl: var(--accent-hue), calc(var(--accent-saturation) * var(--saturation-factor, 1)), var(--accent-lightness);
-  --accent-opacity: 0.85;
-  --accent-text-color: hsl(0, 0%, 100%);
-  --accent-secondary-color: hsla(334, 70%, 25%, 0.55);
-  --accent-secondary-text-color: hsl(330, 100%, 96%);
+  --accent-opacity: 0.95;
+  --accent-text-color: #ffffff;
+  --accent-secondary-color: rgba(229, 0, 127, 0.25);
+  --accent-secondary-text-color: #ffffff;
 
-  /* --- ALERTES (Rouge Crimson Kana) --- */
-  --alert-hue: 350;
-  --alert-saturation: 90%;
-  --alert-lightness: 58%;
-  --alert-hsl: var(--alert-hue), calc(var(--alert-saturation) * var(--saturation-factor, 1)), var(--alert-lightness);
-  --alert-opacity: 0.9;
-  --alert-action-color: hsl(0, 0%, 100%);
-  --alert-text-color: hsl(0, 0%, 100%);
-
-  /* --- MENTIONS (Rose/Magenta Étoilé au lieu du jaune/marron terne) --- */
-  --mention-hue: 334;
+  --alert-hue: 348;
+  --alert-saturation: 100%;
+  --alert-lightness: 50%;
+  --mention-hue: 327;
   --mention-saturation: 100%;
-  --mention-lightness: 65%;
-  --mention-hsl: var(--mention-hue), calc(var(--mention-saturation) * var(--saturation-factor, 1)), var(--mention-lightness);
-  --mention-opacity: 0.95;
-
-  /* --- RÉPONSES / REPLIES (Cyan Aqua Hoshino) --- */
-  --reply-hue: 188;
+  --mention-lightness: 55%;
+  --reply-hue: 184;
   --reply-saturation: 100%;
-  --reply-lightness: 55%;
-  --reply-hsl: var(--reply-hue), calc(var(--reply-saturation) * var(--saturation-factor, 1)), var(--reply-lightness);
-  --reply-opacity: 1;
+  --reply-lightness: 50%;
 
-  /* --- BULLES DE MESSAGES --- */
-  --message-color: hsla(265, 50%, 10%, 0.42);
-  --message-color-hover: hsla(275, 55%, 14%, 0.58);
-  --message-radius: 14px;
+  /* --- MESSAGES, INPUTS & POPOUTS --- */
+  --message-color: rgba(11, 5, 24, 0.68);
+  --message-color-hover: rgba(18, 7, 38, 0.85);
+  --message-radius: 8px;
   --message-padding-top: 8px;
   --message-padding-side: 12px;
-  --notification-color: var(--onk-aqua-cyan);
-  --list-item-radius: 14px;
+  --notification-color: var(--ichigo-cyan);
+  --list-item-radius: 6px;
 
-  /* --- BARRE DE SAISIE (TEXTAREA) --- */
-  --textarea-color: 255, 180, 225;
-  --textarea-alpha: 0.11;
-  --textarea-alpha-focus: 0.17;
-  --textarea-text-color: hsl(0, 0%, 100%);
-  --textarea-placeholder-color: hsla(320, 50%, 88%, 0.75);
-  --textarea-radius: 24px;
-  --textarea-block-color: hsla(265, 70%, 8%, 0.65);
-  --textarea-block-text-color: #ffd1ea;
+  --textarea-color: 15, 7, 32;
+  --textarea-alpha: 0.85;
+  --textarea-alpha-focus: 0.95;
+  --textarea-text-color: #ffffff;
+  --textarea-placeholder-color: rgba(255, 180, 220, 0.65);
+  --textarea-radius: 8px;
 
-  /* --- CARTES, BOUTONS & POPOUTS --- */
-  --card-color: hsla(270, 45%, 15%, 0.32);
-  --card-color-hover: hsla(310, 50%, 20%, 0.42);
-  --card-color-select: hsla(334, 65%, 28%, 0.45);
-  --card-radius: 16px;
+  --card-color: rgba(14, 6, 30, 0.78);
+  --card-color-hover: rgba(24, 10, 48, 0.88);
+  --card-color-select: rgba(229, 0, 127, 0.25);
+  --card-radius: 8px;
+  --button-radius: 6px;
 
-  --button-height: 34px;
-  --button-padding: 16px;
-  --button-color: hsla(var(--accent-hsl), var(--accent-opacity));
-  --button-action-color: hsl(0, 0%, 100%);
-  --button-text-color: var(--accent-text-color);
-  --button-radius: 17px;
+  --popout-color: rgba(9, 4, 19, 0.92);
+  --popout-blur: 12px;
+  --popout-radius: 10px;
+  --popout-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 4px 4px 0px var(--ichigo-magenta);
+  --popout-shadow-border: inset 0 0 0 1px rgba(229, 0, 127, 0.45);
 
-  --popout-color: hsla(265, 65%, 8%, 0.72);
-  --popout-blur: 10px;
-  --popout-radius: 18px;
-  --popout-shadow: 0 16px 40px hsla(265, 90%, 4%, 0.75);
-  --popout-shadow-border: 
-    inset 0 1px 1px hsla(330, 100%, 85%, 0.35),
-    inset 0 -1px 2px hsla(190, 100%, 60%, 0.2),
-    inset 0 0 0 1px hsla(334, 100%, 70%, 0.12);
-
-  /* --- MOTEUR LIQUID GLASS ADOUCI (Moins d'éblouissement blanc) --- */
-  --c-glass: hsl(310, 45%, 65%);
-  --c-light: hsl(330, 100%, 85%);
-  --c-dark: hsl(265, 90%, 6%);
-  --glass-reflex-dark: 2;
-  --glass-reflex-light: 0.28;
-  --light-angle: 45deg;
-  --liquid-glass-saturation: 155%;
-  --liquid-glass-color-subtle: hsla(334, 100%, 75%, 0.04);
-
-  /* --- SCROLLBAR & POLICE --- */
-  --scrollbar-color: 255, 92, 168;
-  --scrollbar-opacity: 0.3;
-  --scrollbar-opacity-hover: 0.6;
-  --font-primary: "Outfit", "gg sans", sans-serif;
-  --font-display: "Outfit", "gg sans", sans-serif;
+  --scrollbar-color: 229, 0, 127;
+  --scrollbar-opacity: 0.5;
+  --scrollbar-opacity-hover: 0.85;
+  --font-primary: "Montserrat", "Noto Sans JP", "gg sans", sans-serif;
+  --font-display: "Montserrat", "Noto Sans JP", "gg sans", sans-serif;
 }
 
 /* ==========================================================================
-   3. CORRECTIF BOUTON HOME : ÉTOILE HOSHINO 100% CENTRÉE (FINI LE DEMI-CARRÉ ROSE)
+   3. VIGNETTE DE SCÈNE & TRAME HALFTONE OFFICIELLE (ICHIGOPRODUCTION.COM)
+   ========================================================================== */
+/* Assombrit intelligemment le wallpaper et applique la trame de points manga */
+.bg__960e4::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(229, 0, 127, 0.14) 1px, transparent 1px),
+    radial-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, rgba(8, 4, 17, 0.82) 0%, rgba(16, 5, 32, 0.48) 50%, rgba(6, 12, 26, 0.85) 100%);
+  background-size: 16px 16px, 16px 16px, 100% 100%;
+  background-position: 0 0, 8px 8px, 0 0;
+  pointer-events: none;
+}
+
+/* Trame Halftone subtile sur la barre latérale comme sur le menu d'ichigoproduction.com */
+.sidebarList__5e434 {
+  background-image: 
+    radial-gradient(rgba(229, 0, 127, 0.07) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(10, 4, 22, 0.88) 0%, rgba(8, 3, 18, 0.92) 100%) !important;
+  background-size: 12px 12px, 100% 100% !important;
+  border-right: 1px solid rgba(229, 0, 127, 0.35) !important;
+}
+
+/* ==========================================================================
+   4. LOGO OFFICIEL 【推しの子】 DANS LA BARRE SUPÉRIEURE & BARRE DE RECHERCHE
+   ========================================================================== */
+/* Remplace le petit texte "Messages privés" tout en haut de la fenêtre par le vrai logo officiel */
+[class*="bar_"] [class*="title_"] {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+[class*="bar_"] [class*="title_"]::before {
+  content: "";
+  display: inline-block;
+  width: 110px;
+  height: 22px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/80/Oshi_no_Ko_logo.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  filter: drop-shadow(0 0 6px rgba(229, 0, 127, 0.6));
+}
+
+/* Barre "Recherche ou lance une conversation" stylisée façon bouton officiel 【SEARCH】 */
+.searchBar__35e86 .searchBarComponent__35e86 {
+  background: #0b0418 !important;
+  border: 1px solid var(--ichigo-magenta) !important;
+  border-radius: 4px !important;
+  box-shadow: 3px 3px 0px rgba(0, 240, 255, 0.5) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 11px !important;
+  transition: all 0.2s ease !important;
+}
+
+.searchBar__35e86 .searchBarComponent__35e86:hover {
+  background: var(--ichigo-magenta) !important;
+  box-shadow: 3px 3px 0px var(--ichigo-gold) !important;
+  transform: translate(-1px, -1px);
+}
+
+/* ==========================================================================
+   5. LES CROCHETS OFFICIELS 【 ... 】 SUR TOUTES LES SECTIONS (STYLE SITE OFFICIEL)
+   ========================================================================== */
+/* Ajoute automatiquement les crochets 【 】 roses et cyans sur "Messages privés", 
+   les catégories de salons et les rôles ! */
+.privateChannelsHeaderContainer__99e7c > span,
+[class*="containerDefault_"] [class*="name_"] > div,
+.membersGroup_c8ffbb > span {
+  font-family: "Montserrat", "Noto Sans JP", sans-serif !important;
+  font-weight: 900 !important;
+  letter-spacing: 0.1em !important;
+  text-transform: uppercase !important;
+  color: #ffffff !important;
+}
+
+.privateChannelsHeaderContainer__99e7c > span::before,
+.membersGroup_c8ffbb > span::before {
+  content: "【 ";
+  color: var(--ichigo-magenta);
+  font-weight: 900;
+  text-shadow: -1px 0 0 var(--ichigo-cyan);
+}
+
+.privateChannelsHeaderContainer__99e7c > span::after,
+.membersGroup_c8ffbb > span::after {
+  content: " 】";
+  color: var(--ichigo-cyan);
+  font-weight: 900;
+  text-shadow: 1px 0 0 var(--ichigo-magenta);
+}
+
+/* ==========================================================================
+   6. BOUTON HOME : L'ÉTOILE HOSHINO ENCADRÉE FAÇON BADGE ICHIGO PRODUCTION
    ========================================================================== */
 [data-list-item-id="guildsnav___home"] {
   background: transparent !important;
 }
 
-/* On cible directement le wrapper enfant pour qu'il prenne 100% de la place */
 [data-list-item-id="guildsnav___home"] [class*="childWrapper_"] {
   position: relative !important;
   width: 48px !important;
   height: 48px !important;
-  background: radial-gradient(circle, hsla(334, 90%, 38%, 0.85) 0%, hsla(265, 85%, 12%, 0.95) 100%) !important;
-  border: 1px solid hsla(334, 100%, 75%, 0.45) !important;
-  box-shadow: 0 0 14px hsla(334, 100%, 55%, 0.4) !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background: linear-gradient(135deg, #16052b 0%, #090314 100%) !important;
+  border: 2px solid var(--ichigo-magenta) !important;
+  box-shadow: 3px 3px 0px var(--ichigo-cyan) !important;
+  border-radius: 10px !important;
+  transition: all 0.25s ease !important;
 }
 
-/* Masque totalement l'icône Discord d'origine */
 [data-list-item-id="guildsnav___home"] svg {
   display: none !important;
 }
 
-/* Injecte l'étoile à 6 branches d'Ai Hoshino parfaitement au centre */
 [data-list-item-id="guildsnav___home"] [class*="childWrapper_"]::before {
   content: "";
   position: absolute;
@@ -167,235 +235,194 @@
   margin: auto;
   width: 32px;
   height: 32px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='45%25' stop-color='%23ffe6f2'/%3E%3Cstop offset='100%25' stop-color='%23ff2a85'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='36' fill='none' stroke='%23ff5ca8' stroke-width='2.2' stroke-dasharray='4 3' opacity='0.85'/%3E%3Ccircle cx='50' cy='50' r='22' fill='none' stroke='%2300e5ff' stroke-width='1.8' opacity='0.75'/%3E%3Cpolygon points='50,4 58,36 90,26 66,50 90,74 58,64 50,96 42,64 10,74 34,50 10,26 42,36' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='6' fill='%23ffffff'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='50%25' stop-color='%23ffe6f2'/%3E%3Cstop offset='100%25' stop-color='%23e5007f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23e5007f' stroke-width='2.5' stroke-dasharray='5 3'/%3E%3Ccircle cx='50' cy='50' r='23' fill='none' stroke='%2300f0ff' stroke-width='2'/%3E%3Cpolygon points='50,2 58,36 92,24 67,50 92,76 58,64 50,98 42,64 8,76 33,50 8,24 42,36' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='6.5' fill='%23ffe600'/%3E%3C/svg%3E");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  filter: drop-shadow(0 0 6px var(--onk-ai-magenta));
-  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.4s ease;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 [data-list-item-id="guildsnav___home"]:hover [class*="childWrapper_"] {
-  background: radial-gradient(circle, hsla(190, 90%, 40%, 0.8) 0%, hsla(334, 85%, 25%, 0.95) 100%) !important;
-  border-color: var(--onk-aqua-cyan) !important;
-  box-shadow: 0 0 20px hsla(190, 100%, 50%, 0.5), 0 0 10px var(--onk-ai-magenta) !important;
+  border-color: var(--ichigo-gold) !important;
+  box-shadow: -3px -3px 0px var(--ichigo-magenta), 3px 3px 0px var(--ichigo-cyan) !important;
 }
 
 [data-list-item-id="guildsnav___home"]:hover [class*="childWrapper_"]::before {
   transform: rotate(180deg) scale(1.12);
-  filter: drop-shadow(0 0 10px var(--onk-aqua-cyan));
 }
 
 /* ==========================================================================
-   4. CORRECTIF LISTE DES MP, SALONS & PILULES DE SERVEURS
+   7. SALONS & MP SÉLECTIONNÉS (STYLE CARTE OFFICIELLE AVEC OMBRE CHROMATIQUE)
    ========================================================================== */
-/* Pilules de sélection à gauche des serveurs (Dégradé Rose -> Cyan) */
 [class*="pill_"] span {
-  background: linear-gradient(180deg, var(--onk-ai-magenta), var(--onk-aqua-cyan)) !important;
-  box-shadow: 0 0 8px var(--onk-ai-magenta);
+  background: linear-gradient(180deg, var(--ichigo-magenta), var(--ichigo-cyan)) !important;
+  box-shadow: 0 0 8px var(--ichigo-magenta);
 }
 
-/* Correction de l'éblouissement sur le MP sélectionné (!KaRuoko sur ton screen) */
+/* MP ou Salon sélectionné : Fond noir obsidienne + bordure néon + décalage cyan */
 .channel__972a0 [class*="interactiveSelected_"],
 .modeSelected__2ea32 .link__2ea32 {
-  background: linear-gradient(90deg, hsla(334, 85%, 45%, 0.38) 0%, hsla(265, 70%, 25%, 0.28) 65%, hsla(190, 90%, 45%, 0.18) 100%) !important;
-  border-left: 3px solid var(--onk-ai-magenta) !important;
-  box-shadow: inset 0 1px 1px hsla(330, 100%, 85%, 0.25), 0 4px 12px hsla(0, 0%, 0%, 0.25) !important;
+  background: linear-gradient(90deg, rgba(229, 0, 127, 0.35) 0%, rgba(12, 5, 28, 0.92) 85%) !important;
+  border: 1px solid var(--ichigo-magenta) !important;
+  border-left: 4px solid var(--ichigo-cyan) !important;
+  box-shadow: 3px 3px 0px rgba(229, 0, 127, 0.65) !important;
+  border-radius: 6px !important;
 }
 
-/* Survol d'un MP ou d'un salon */
 .channel__972a0 [class*="interactive_"]:hover:not([class*="interactiveSelected_"]),
 .wrapper__2ea32:hover:not(.modeSelected__2ea32) .link__2ea32 {
-  background: hsla(310, 50%, 22%, 0.32) !important;
-}
-
-/* Étoile dorée devant le salon de serveur actif */
-.modeSelected__2ea32 .name__2ea32::before {
-  content: "✦ ";
-  color: var(--onk-star-gold);
-  text-shadow: 0 0 6px var(--onk-star-gold);
-}
-
-/* Empêche les icônes PlatformIndicators de chevaucher les tags de clan dans les MP */
-.channel__972a0 [class*="nameAndDecorators_"] {
-  gap: 4px;
-  overflow: hidden;
+  background: rgba(229, 0, 127, 0.14) !important;
+  border-left: 3px solid var(--ichigo-magenta) !important;
 }
 
 /* ==========================================================================
-   5. CORRECTIF BULLES DE CHAT, MENTIONS & RÉPONSES (REPLIES)
+   8. HEADER DU CHAT & REFONTE DES MESSAGES (FINI LES GROSSES BRIQUES GRISES)
    ========================================================================== */
-/* Espacement propre à droite des bulles de messages + contour subtil */
-.message__5126c {
+/* Barre du haut du chat avec la ligne spectrale 4 couleurs d'ichigoproduction.com */
+.title_f75fb0,
+.header_f37cb1 {
+  background: rgba(9, 4, 20, 0.9) !important;
+  border-bottom: 2px solid transparent !important;
+  border-image: linear-gradient(90deg, var(--ichigo-magenta), var(--ichigo-cyan), var(--ichigo-gold), var(--ichigo-violet)) 1 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Suppression totale de l'ombre blanche/grise de Translucence sur les messages */
+.cozyMessage__5126c {
+  box-shadow: none !important;
   margin-right: 18px !important;
-  border: 1px solid hsla(330, 60%, 80%, 0.06);
-  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+/* Premier message d'un groupe (avec avatar et pseudo) : Style Boîte de Dialogue Officielle */
+.message__5126c.groupStart__5126c {
+  background: linear-gradient(90deg, rgba(13, 6, 28, 0.86) 0%, rgba(10, 4, 22, 0.68) 100%) !important;
+  border: 1px solid rgba(229, 0, 127, 0.25) !important;
+  border-left: 3px solid var(--ichigo-magenta) !important;
+  border-radius: 4px 10px 10px 4px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  margin-top: 10px !important;
+}
+
+/* Messages suivants d'une même personne : plus fins, sombres et élégants (pas de gros blocs gris !) */
+.message__5126c:not(.groupStart__5126c) {
+  background: rgba(10, 4, 22, 0.52) !important;
+  border: none !important;
+  border-left: 2px solid rgba(0, 240, 255, 0.35) !important;
+  border-radius: 0 6px 6px 0 !important;
+  margin-top: 2px !important;
+  padding-top: 4px !important;
+  padding-bottom: 4px !important;
 }
 
 .message__5126c:hover {
-  border-color: hsla(334, 100%, 65%, 0.28);
-  border-left: 2px solid var(--onk-ai-magenta);
+  background: rgba(22, 8, 44, 0.88) !important;
+  border-left-color: var(--ichigo-gold) !important;
+  box-shadow: 3px 3px 0px rgba(229, 0, 127, 0.45) !important;
 }
 
-/* --- CORRECTIF DES RÉPONSES (Les messages avec réponse en haut) --- */
-/* Aperçu de la réponse au-dessus du message */
+/* --- RÉPONSES (REPLIES) STYLE AQUA CYAN --- */
 [class*="repliedMessage_"] {
-  background: hsla(190, 85%, 20%, 0.25);
-  padding: 2px 8px;
-  border-radius: 8px;
-  border-left: 2px solid var(--onk-aqua-cyan);
-  margin-bottom: 4px;
+  background: rgba(0, 240, 255, 0.10) !important;
+  border: 1px solid rgba(0, 240, 255, 0.35) !important;
+  border-left: 3px solid var(--ichigo-cyan) !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  margin-bottom: 4px !important;
   width: fit-content;
-  max-width: 95%;
 }
 
-/* La petite branche courbe qui relie l'avatar à la réponse (en Cyan Aqua !) */
-[class*="repliedMessageSpine_"],
-[class*="repliedMessageContentHovered_"] [class*="repliedMessageSpine_"] {
-  border-color: var(--onk-aqua-cyan) !important;
-  filter: drop-shadow(0 0 3px hsla(190, 100%, 50%, 0.4));
+[class*="repliedMessageSpine_"] {
+  border-color: var(--ichigo-cyan) !important;
 }
 
-/* --- CORRECTIF DES MENTIONS (@!KaRuoko) : Fini le fond marron/moutarde ! --- */
+/* --- MENTIONS (@pseudo) STYLE ÉTIQUETTE OFFICIELLE 【@】 --- */
 .wrapper_f61d60,
-.mention,
-[class*="mention_"]:not([class*="mentioned_"]) {
-  background: linear-gradient(135deg, hsla(334, 95%, 50%, 0.32), hsla(275, 85%, 50%, 0.32)) !important;
-  color: #ffdbf0 !important;
-  border: 1px solid hsla(334, 100%, 70%, 0.45) !important;
-  border-radius: 6px !important;
-  padding: 0 5px !important;
-  font-weight: 600 !important;
-  text-shadow: 0 0 6px hsla(334, 100%, 60%, 0.5);
-  transition: all 0.2s ease;
+.mention {
+  background: var(--ichigo-magenta) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  border-radius: 3px !important;
+  padding: 1px 6px !important;
+  box-shadow: 2px 2px 0px var(--ichigo-cyan) !important;
+  text-shadow: none !important;
+  transition: all 0.15s ease;
 }
 
 .wrapper_f61d60:hover,
 .mention:hover {
-  background: linear-gradient(135deg, var(--onk-ai-magenta), var(--onk-purple-glow)) !important;
-  color: #ffffff !important;
-  box-shadow: 0 0 12px hsla(334, 100%, 60%, 0.6);
+  background: var(--ichigo-cyan) !important;
+  color: #080411 !important;
+  box-shadow: 2px 2px 0px var(--ichigo-magenta) !important;
 }
 
-/* Message entier qui te mentionne (Halo Rose & Or Étoile) */
+/* Message entier qui te mentionne */
 .mentioned__5126c {
-  background: linear-gradient(90deg, hsla(334, 90%, 45%, 0.24) 0%, hsla(45, 100%, 55%, 0.10) 100%) !important;
-  border: 1px solid hsla(334, 100%, 65%, 0.35) !important;
-  border-left: 3px solid var(--onk-star-gold) !important;
-  box-shadow: 0 4px 16px hsla(334, 100%, 50%, 0.15) !important;
+  background: linear-gradient(90deg, rgba(229, 0, 127, 0.28) 0%, rgba(12, 5, 26, 0.85) 100%) !important;
+  border: 1px solid var(--ichigo-magenta) !important;
+  border-left: 4px solid var(--ichigo-gold) !important;
+  box-shadow: 3px 3px 0px var(--ichigo-magenta) !important;
 }
 
-.mentioned__5126c::before {
-  display: none !important;
+/* ==========================================================================
+   9. BARRE D'ÉCRITURE (TEXTAREA) FAÇON CONSOLE NOIRE OBSIDIENNE
+   ========================================================================== */
+.scrollableContainer__74017 {
+  background: rgba(9, 4, 20, 0.92) !important;
+  border: 1px solid var(--ichigo-magenta) !important;
+  border-radius: 8px !important;
+  box-shadow: 4px 4px 0px rgba(0, 240, 255, 0.4), 0 8px 24px rgba(0, 0, 0, 0.7) !important;
 }
 
-/* Barre d'écriture (Input) avec étoile et halo au clic */
+.channelTextArea__74017:focus-within .scrollableContainer__74017 {
+  border-color: var(--ichigo-cyan) !important;
+  box-shadow: 4px 4px 0px var(--ichigo-magenta), 0 0 15px rgba(0, 240, 255, 0.3) !important;
+}
+
 .placeholder__1b31f::before {
-  content: "✦ ";
-  color: var(--onk-ruby-pink);
-}
-
-.channelTextArea__74017:focus-within {
-  box-shadow: 
-    var(--liquid-glass-shadow),
-    0 0 16px hsla(334, 100%, 60%, 0.3),
-    0 0 3px var(--onk-aqua-cyan) !important;
+  content: "【✦】 ";
+  color: var(--ichigo-magenta);
+  font-weight: 900;
 }
 
 /* ==========================================================================
-   6. CORRECTIF PROFIL UTILISATEUR À DROITE (EN MP)
+   10. PANNEAU UTILISATEUR, PROFIL & STATUTS
    ========================================================================== */
-/* Rend le conteneur autour du profil à droite (crânes bleus sur ton screen) 
-   parfaitement intégré au verre dépoli de Translucence */
-aside[class*="profilePanel_"],
-[class*="outer_c0bea0"]:not([class*="custom-profile-theme"]) {
-  background: transparent !important;
-}
-
-aside[class*="profilePanel_"] > [class*="outer_"] {
-  margin-left: 8px;
-  border-radius: var(--app-radius) !important;
-  box-shadow: var(--popout-shadow) !important;
-}
-
-/* ==========================================================================
-   7. CORRECTIF PANNEAU UTILISATEUR EN BAS À GAUCHE & DÉFILEMENT
-   ========================================================================== */
-/* Préserve ta plaque nominative (Fleurs de cerisier) tout en gardant le contour néon */
 .panels__5e434 {
-  border: 1px solid hsla(334, 100%, 75%, 0.22) !important;
-  box-shadow: 0 8px 24px hsla(0, 0%, 0%, 0.45), 0 0 12px hsla(334, 100%, 60%, 0.15) !important;
+  background-color: rgba(9, 4, 20, 0.9) !important;
+  border: 1px solid var(--ichigo-magenta) !important;
+  box-shadow: 3px 3px 0px var(--ichigo-cyan) !important;
+  border-radius: 8px !important;
 }
 
-/* Ajoute de l'espace en bas de la liste des serveurs et des MP pour que le dernier
-   élément ne soit jamais bloqué derrière le panneau utilisateur */
+/* Espace de défilement en bas des listes pour ne pas cacher le dernier salon/serveur */
 .sidebar__5e434 .guilds__5e434 [class*="scroller_"],
 .sidebar__5e434 [class*="privateChannels_"] [class*="scroller_"],
 .sidebar__5e434 [class*="sidebarList_"] [class*="scroller_"] {
   padding-bottom: 36px !important;
 }
 
-/* Lecteur Spotify Vencord (B-Komachi Live) */
-#vc-spotify-player {
-  background: linear-gradient(180deg, hsla(334, 80%, 18%, 0.28) 0%, transparent 100%) !important;
-  border-bottom: 1px solid hsla(334, 100%, 70%, 0.2);
+/* Intégration propre du panneau de profil à droite */
+aside[class*="profilePanel_"],
+[class*="outer_c0bea0"]:not([class*="custom-profile-theme"]) {
+  background: transparent !important;
 }
 
-#vc-spotify-song-title {
-  color: #ffffff !important;
-  font-weight: 700;
-  text-shadow: 0 0 8px var(--onk-ai-magenta);
-}
-
-#vc-spotify-song-title::before {
-  content: "★ ";
-  color: var(--onk-star-gold);
-}
-
-#vc-spotify-player [class*="barFill_"] {
-  background: linear-gradient(90deg, var(--onk-aqua-cyan), var(--onk-ai-magenta), var(--onk-star-gold)) !important;
-}
-
-/* ==========================================================================
-   8. CORRECTIF STATUTS UTILISATEUR (SANS BAVURE SUR LES AVATARS HORS-LIGNE)
-   ========================================================================== */
-/* On cible uniquement les formes SVG de statut sans toucher aux masques d'avatar 
-   ni ajouter de drop-shadow qui causait l'anneau violet baveux */
+/* Statuts Utilisateur aux couleurs officielles (Cyan, Or, Magenta, Violet sombre) */
 svg > rect[fill="#23a55a"], svg > rect[fill="#43a25a"],
 svg > polygon[fill="#23a55a"], svg > path[fill="#23a55a"] {
-  fill: var(--onk-aqua-cyan) !important; /* En ligne : Cyan Aqua */
+  fill: var(--ichigo-cyan) !important;
 }
 
 svg > rect[fill="#f0b232"], svg > rect[fill="#ca9654"],
 svg > polygon[fill="#f0b232"], svg > path[fill="#f0b232"] {
-  fill: var(--onk-star-gold) !important; /* Inactif : Or Étoile */
+  fill: var(--ichigo-gold) !important;
 }
 
 svg > rect[fill="#f23f43"], svg > rect[fill="#d83a42"],
 svg > polygon[fill="#f23f43"], svg > path[fill="#f23f43"] {
-  fill: var(--onk-ai-magenta) !important; /* Ne pas déranger : Magenta Ai/Ruby */
+  fill: var(--ichigo-magenta) !important;
 }
 
 svg > rect[fill="#80848e"], svg > rect[fill="#82858f"] {
-  fill: #7a6894 !important; /* Hors-ligne : Gris-Violet discret et propre */
-}
-
-/* ==========================================================================
-   9. CARTES VENCORD & TAGS BOT
-   ========================================================================== */
-.vc-addon-card {
-  background: linear-gradient(135deg, hsla(265, 50%, 16%, 0.45), hsla(334, 50%, 18%, 0.25)) !important;
-  border: 1px solid hsla(334, 100%, 75%, 0.18) !important;
-  transition: all 0.25s ease !important;
-}
-
-.vc-addon-card:hover {
-  border-color: var(--onk-aqua-cyan) !important;
-  box-shadow: 0 6px 20px hsla(190, 100%, 50%, 0.18) !important;
-  transform: translateY(-2px) !important;
-}
-
-.botTagRegular__82f07 {
-  background: linear-gradient(90deg, var(--onk-ai-magenta), var(--onk-purple-glow)) !important;
-  color: #ffffff !important;
+  fill: #5c4b73 !important;
 }
