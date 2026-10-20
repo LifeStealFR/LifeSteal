@@ -1,428 +1,676 @@
 /**
- * @name 【推しの子】 Ichigo Production - Official License UI
- * @author CapnKitten (Base Translucence) & Ichigo Production Edition
- * @version 4.0.0
- * @description Refonte totale inspirée du site officiel ichigoproduction.com : Noir Obsidienne, Trame Halftone, Crochets 【】, Logo SVG Officiel & Chromatic Split.
- * @source https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css
+ * @name Oshi no Ko — Starlight Idol (B-Komachi Edition)
+ * @author Toi & Custom Base (source2.css)
+ * @version 2.0.0
+ * @description Thème Oshi no Ko ultra-complet basé sur Liquid Glass (source2.css). Inclut les yeux étoilés d'Ai Hoshino animés, des reflets prismatiques Aqua x Ruby, et des presets pour chaque personnage.
+ * @source https://github.com/TON_PSEUDO_GITHUB/TON_REPO
  */
 
 /* ==========================================================================
-   1. IMPORTS (BASE TRANSLUCENCE + POLICES OFFICIELLES JAPONAISES/DISPLAY)
+   1. IMPORTS (TON FICHIER SOURCE2.CSS + POLICES D'ÉCRITURE IDOL/MODERNE)
    ========================================================================== */
-@import url("https://capnkitten.github.io/BetterDiscord/Themes/Translucence/css/source.css");
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,500;0,700;0,800;0,900;1,800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap");
+@import url("https://raw.githubusercontent.com/LifeStealFR/LifeSteal/refs/heads/main/discord/themes/oshinoko/source.css");
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap");
 
 /* ==========================================================================
-   2. PALETTE & SUPPRESSION DU VOILE GRIS DE TRANSLUCENCE
+   2. CONFIGURATION GLOBALE & VARIABLES OSHI NO KO (SURCHARGE DE SOURCE2.CSS)
    ========================================================================== */
 :root {
-  /* --- COULEURS OFFICIELLES ICHIGO PRODUCTION (ichigoproduction.com) --- */
-  --ichigo-magenta: #e5007f;       /* Rose officiel du logo 【推しの子】 */
-  --ichigo-neon-pink: #ff1493;     /* Rose scène B-Komachi */
-  --ichigo-cyan: #00f0ff;          /* Cyan Aqua / Aberration chromatique */
-  --ichigo-gold: #ffe600;          /* Jaune/Or Ruby & MEM-cho */
-  --ichigo-violet: #7b2cbf;        /* Violet étoilé Ai Hoshino */
-  --ichigo-obsidian: #080411;      /* Noir-Violet profond du site officiel */
-  --ichigo-panel: rgba(10, 5, 22, 0.82);
+  /* Correctif de sécurité pour les calculs HSL de source2.css */
+  --saturation-factor: 1;
 
-  /* --- VISUELS OFFICIELS (Avec assombrissement automatique intégré plus bas) ---
-   * 1. Visuel Officiel ichigoproduction.com (OGP) : url(https://ichigoproduction.com/core_sys/images/others/ogp.jpg)
-   * 2. Visuel Officiel Saison 2 (ichigoproduction): url(https://ichigoproduction.com/Season2/core_sys/images/main/home/kv02.jpg)
-   * 3. Visuel Officiel Saison 4 (ichigoproduction): url(https://ichigoproduction.com/Season4/core_sys/images/main/home/kv4th-01.jpg)
-   * 4. Ai Hoshino Concert 4K 16:9                 : url(https://w.wallhaven.cc/full/qz/wallhaven-qzkz3r.png)
-   * 5. Ai Hoshino Starry Eyes 4K 16:9             : url(https://w.wallhaven.cc/full/85/wallhaven-85dwdk.jpg)
-   */
-  --app-bg: url(https://w.wallhaven.cc/full/qz/wallhaven-qzkz3r.png);
-  --app-blur: 2px;
-  --app-margin: 14px;
-  --app-radius: 10px; /* Angles plus vifs et graphiques comme sur ichigoproduction.com */
+  /* Polices personnalisées */
+  --font-primary: 'Outfit', 'gg sans', sans-serif;
+  --font-display: 'Outfit', 'gg sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
 
-  /* --- CORRECTION MAJEURE : FINI LE VOILE GRIS LAITEUX DE TRANSLUCENCE --- */
-  --main-rgb: 8, 4, 17;
-  --main-content-opacity: 0.72;
-  --sidebar-opacity: 0.84;
+  /* PALETTE SIGNATURE OSHI NO KO */
+  --onk-ai-magenta: #ff2a85;
+  --onk-ai-purple: #9d4edd;
+  --onk-aqua-cyan: #00e5ff;
+  --onk-ruby-crimson: #ff0a54;
+  --onk-star-gold: #ffbe0b;
+  --onk-stage-dark: #0c0517;
+
+  /* DÉGRADÉS SIGNATURE (Ai / Aqua / Ruby) */
+  --onk-gradient-twins: linear-gradient(135deg, var(--onk-ai-magenta) 0%, var(--onk-ai-purple) 50%, var(--onk-aqua-cyan) 100%);
+  --onk-gradient-starlight: linear-gradient(90deg, var(--onk-ai-magenta), var(--onk-star-gold), var(--onk-aqua-cyan));
+  --onk-gradient-vertical: linear-gradient(180deg, var(--onk-ai-magenta) 0%, var(--onk-aqua-cyan) 100%);
+
+  /* SVG ENCODÉS : L'Œil Étoilé à 6 branches d'Ai Hoshino */
+  --onk-star-eye-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='45%25' stop-color='%23ffbee3'/%3E%3Cstop offset='80%25' stop-color='%23ff2a85'/%3E%3Cstop offset='100%25' stop-color='%237209b7'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='46' fill='none' stroke='%2300e5ff' stroke-width='2.5' stroke-dasharray='8 4' opacity='0.75'/%3E%3Ccircle cx='50' cy='50' r='40' fill='%231a062e' stroke='%23ff2a85' stroke-width='3'/%3E%3Cpolygon points='50,6 59,36 90,27 66,50 90,73 59,64 50,94 41,64 10,73 34,50 10,27 41,36' fill='url(%23g)'/%3E%3Cpolygon points='50,18 54,44 80,50 54,56 50,82 46,56 20,50 46,44' fill='%23ffffff'/%3E%3Ccircle cx='50' cy='50' r='7' fill='%23ffbe0b'/%3E%3Ccircle cx='34' cy='32' r='4' fill='%2300e5ff'/%3E%3Ccircle cx='68' cy='65' r='3' fill='%23ffbe0b'/%3E%3C/svg%3E");
+
+  /* ------------------------------------------------------------------------
+     FOND D'ÉCRAN & STRUCTURE DE L'APPLICATION (Variables source2.css)
+     Astuce : Tu peux aussi héberger ton image sur ton GitHub !
+     ------------------------------------------------------------------------ */
+  --app-bg: url("https://images4.alphacoders.com/138/1389939.jpg");
+  --app-blur: 7px;
+  --app-margin: 20px;
+  --app-radius: 20px;
+
+  /* Teinte principale : Violet/Indigo cosmique profond (Scène B-Komachi) */
+  --main-rgb: 14, 6, 28;
+  --main-content-opacity: 0.34;
+  --sidebar-opacity: 0.44;
   --main-content-color: rgba(var(--main-rgb), var(--main-content-opacity));
   --sidebar-color: rgba(var(--main-rgb), var(--sidebar-opacity));
 
-  /* C'est CETTE variable qui rendait tout ton Discord gris/rose délavé ! */
-  --liquid-glass-color-subtle: rgba(9, 4, 19, 0.78) !important;
-  --liquid-glass-saturation: 130%;
-  --liquid-glass-shadow: 
-    inset 0 0 0 1px rgba(229, 0, 127, 0.28),
-    inset 0 1px 0 0 rgba(0, 240, 255, 0.22),
-    0 10px 30px rgba(0, 0, 0, 0.8) !important;
+  /* ------------------------------------------------------------------------
+     COULEUR D'ACCENTUATION PRINCIPALE (Par défaut : AI HOSHINO MAGENTA)
+     ------------------------------------------------------------------------ */
+  --accent-hue: 332;
+  --accent-saturation: 95%;
+  --accent-lightness: 60%;
+  --accent-hsl: var(--accent-hue), calc(var(--accent-saturation) * var(--saturation-factor)), var(--accent-lightness);
+  --accent-opacity: 0.88;
+  --accent-text-color: hsl(0, 0%, 100%);
+  --accent-secondary-color: hsl(from hsl(var(--accent-hsl)) h calc(s * 0.7) calc(l * 0.28) / calc(var(--accent-opacity) * 0.6));
+  --accent-secondary-text-color: hsl(330, 100%, 96%);
 
-  /* --- ACCENTUATIONS & BOUTONS --- */
-  --accent-hue: 327;
-  --accent-saturation: 100%;
-  --accent-lightness: 45%;
-  --accent-hsl: var(--accent-hue), calc(var(--accent-saturation) * var(--saturation-factor, 1)), var(--accent-lightness);
-  --accent-opacity: 0.95;
-  --accent-text-color: #ffffff;
-  --accent-secondary-color: rgba(229, 0, 127, 0.25);
-  --accent-secondary-text-color: #ffffff;
+  /* ALERTES (Ruby Hoshino Crimson) */
+  --alert-hue: 346;
+  --alert-saturation: 92%;
+  --alert-lightness: 56%;
+  --alert-hsl: var(--alert-hue), calc(var(--alert-saturation) * var(--saturation-factor)), var(--alert-lightness);
+  --alert-opacity: 0.88;
+  --alert-action-color: hsl(0, 0%, 100%);
+  --alert-text-color: hsl(0, 0%, 100%);
 
-  --alert-hue: 348;
-  --alert-saturation: 100%;
-  --alert-lightness: 50%;
-  --mention-hue: 327;
+  /* MENTIONS (Étoile Dorée Hoshino ✨) */
+  --mention-hue: 43;
   --mention-saturation: 100%;
-  --mention-lightness: 55%;
-  --reply-hue: 184;
-  --reply-saturation: 100%;
-  --reply-lightness: 50%;
+  --mention-lightness: 58%;
+  --mention-hsl: var(--mention-hue), calc(var(--mention-saturation) * var(--saturation-factor)), var(--mention-lightness);
+  --mention-opacity: 0.95;
 
-  /* --- MESSAGES, INPUTS & POPOUTS --- */
-  --message-color: rgba(11, 5, 24, 0.68);
-  --message-color-hover: rgba(18, 7, 38, 0.85);
-  --message-radius: 8px;
-  --message-padding-top: 8px;
+  /* RÉPONSES (Aqua Hoshino Cyan 💎) */
+  --reply-hue: 188;
+  --reply-saturation: 98%;
+  --reply-lightness: 54%;
+  --reply-hsl: var(--reply-hue), calc(var(--reply-saturation) * var(--saturation-factor)), var(--reply-lightness);
+  --reply-opacity: 0.95;
+
+  /* MESSAGES */
+  --message-color: hsla(268, 55%, 8%, 0.36);
+  --message-color-hover: hsla(285, 60%, 12%, 0.52);
+  --message-radius: 16px;
+  --message-padding-top: 10px;
   --message-padding-side: 12px;
-  --notification-color: var(--ichigo-cyan);
-  --list-item-radius: 6px;
+  --notification-color: hsl(188, 100%, 60%);
+  --list-item-radius: 14px;
 
-  --textarea-color: 15, 7, 32;
-  --textarea-alpha: 0.85;
-  --textarea-alpha-focus: 0.95;
-  --textarea-text-color: #ffffff;
-  --textarea-placeholder-color: rgba(255, 180, 220, 0.65);
-  --textarea-radius: 8px;
+  /* ZONE DE TEXTE (CHATBAR) */
+  --textarea-color: 255, 190, 230;
+  --textarea-alpha: 0.11;
+  --textarea-alpha-focus: 0.18;
+  --textarea-text-color: hsl(330, 100%, 98%);
+  --textarea-placeholder-color: hsla(320, 40%, 85%, 0.7);
+  --textarea-radius: 26px;
+  --textarea-block-color: hsla(265, 65%, 6%, 0.58);
+  --textarea-block-text-color: #ffd6ec;
 
-  --card-color: rgba(14, 6, 30, 0.78);
-  --card-color-hover: rgba(24, 10, 48, 0.88);
-  --card-color-select: rgba(229, 0, 127, 0.25);
-  --card-radius: 8px;
-  --button-radius: 6px;
+  /* CARTES & CONTENEURS */
+  --card-color: hsla(280, 45%, 16%, 0.24);
+  --card-color-hover: hsla(315, 55%, 22%, 0.34);
+  --card-color-select: hsla(332, 75%, 30%, 0.42);
+  --card-radius: 18px;
+  --card-header-shadow: 0px 4px 14px 0px hsla(270, 80%, 4%, 0.45);
 
-  --popout-color: rgba(9, 4, 19, 0.92);
-  --popout-blur: 12px;
-  --popout-radius: 10px;
-  --popout-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 4px 4px 0px var(--ichigo-magenta);
-  --popout-shadow-border: inset 0 0 0 1px rgba(229, 0, 127, 0.45);
+  /* BOUTONS */
+  --button-height: 34px;
+  --button-padding: 18px;
+  --button-radius: 17px;
+  --button-action-color: hsl(0, 0%, 100%);
 
-  --scrollbar-color: 229, 0, 127;
-  --scrollbar-opacity: 0.5;
-  --scrollbar-opacity-hover: 0.85;
-  --font-primary: "Montserrat", "Noto Sans JP", "gg sans", sans-serif;
-  --font-display: "Montserrat", "Noto Sans JP", "gg sans", sans-serif;
+  /* POPOUTS & MODALES */
+  --popout-color: hsla(268, 65%, 8%, 0.62);
+  --popout-blur: 10px;
+  --popout-radius: 20px;
+  --popout-shadow: 0 24px 48px hsla(270, 90%, 3%, 0.65), 0 0 22px hsla(332, 95%, 60%, 0.14);
+  --popout-shadow-border:
+    inset 0 1px 1px hsla(330, 100%, 85%, 0.42),
+    inset 0 -1px 2px hsla(188, 100%, 60%, 0.25),
+    inset 0 0 0 1px hsla(332, 90%, 70%, 0.16);
+  --popout-header-shadow: 0px 4px 12px 0px hsla(268, 90%, 4%, 0.4);
+
+  /* STATUTS & ACTIVITÉS */
+  --nowplaying-color: 0, 229, 255;    /* Aqua Cyan */
+  --streaming-color: 157, 78, 221;    /* Idol Purple */
+  --spotify-color: 255, 42, 133;      /* B-Komachi Pink */
+  --server-folder-color: hsla(332, 85%, 60%, 0.16);
+
+  /* LIQUID GLASS PRISMATIQUE (Rose Ai & Cyan Aqua) */
+  --c-glass: hsl(310, 45%, 75%);
+  --c-light: hsl(332, 100%, 84%);
+  --c-dark: hsl(268, 90%, 6%);
+  --glass-reflex-dark: 2.2;
+  --glass-reflex-light: 0.42;
+  --light-angle: 42deg;
+  --liquid-glass-saturation: 165%;
+  --liquid-glass-color-subtle: hsla(332, 100%, 80%, 0.08);
 }
 
 /* ==========================================================================
-   3. VIGNETTE DE SCÈNE & TRAME HALFTONE OFFICIELLE (ICHIGOPRODUCTION.COM)
+   🎭 PRESETS DE PERSONNAGES (Décommente celui que tu veux activer !)
    ========================================================================== */
-/* Assombrit intelligemment le wallpaper et applique la trame de points manga */
-.bg__960e4::after {
+
+/* --- PRESET 2 : AQUA HOSHINO (Cyan Abyssal & Vengeance) --- */
+/*
+:root {
+  --accent-hue: 190;
+  --accent-saturation: 96%;
+  --accent-lightness: 52%;
+  --reply-hue: 332;
+  --c-light: hsl(190, 100%, 82%);
+}
+*/
+
+/* --- PRESET 3 : RUBY HOSHINO (B-Komachi Rubis & Or) --- */
+/*
+:root {
+  --accent-hue: 348;
+  --accent-saturation: 95%;
+  --accent-lightness: 58%;
+  --reply-hue: 45;
+  --c-light: hsl(350, 100%, 85%);
+}
+*/
+
+/* --- PRESET 4 : KANA ARIMA (Génie au Bicarbonate - Rouge Corail) --- */
+/*
+:root {
+  --accent-hue: 356;
+  --accent-saturation: 88%;
+  --accent-lightness: 62%;
+  --main-rgb: 24, 6, 14;
+}
+*/
+
+/* --- PRESET 5 : AKANE KUROKAWA (Théâtre Indigo & Étoile Bleue) --- */
+/*
+:root {
+  --accent-hue: 232;
+  --accent-saturation: 85%;
+  --accent-lightness: 66%;
+  --main-rgb: 6, 10, 28;
+}
+*/
+
+/* ==========================================================================
+   3. COULEURS DE TEXTE & LIENS (.theme-dark)
+   ========================================================================== */
+@supports (color: color-mix(in lch, red, blue)) {
+  .theme-dark {
+    --text-primary: hsl(330, 100%, 99%);
+    --text-secondary: hsl(310, 35%, 86%);
+    --text-default: hsl(315, 45%, 93%);
+    --text-muted: hsl(295, 25%, 74%);
+    --channels-default: hsl(305, 30%, 82%);
+    --channel-icon: hsl(320, 65%, 78%);
+    --text-strong: hsl(0, 0%, 100%);
+    --icon-primary: hsl(330, 100%, 97%);
+    --icon-secondary: hsl(315, 50%, 86%);
+    --icon-tertiary: hsl(295, 30%, 75%);
+    --interactive-normal: hsl(315, 40%, 85%);
+    --interactive-hover: hsl(332, 100%, 95%);
+    --interactive-active: hsl(0, 0%, 100%);
+    --background-modifier-hover: hsla(332, 95%, 65%, 0.14);
+    --background-modifier-active: hsla(332, 95%, 65%, 0.22);
+    --background-modifier-selected: hsla(332, 95%, 60%, 0.28);
+    --background-modifier-accent: hsla(332, 90%, 75%, 0.22);
+    --text-brand: hsl(var(--accent-hsl));
+    --text-link: hsl(188, 98%, 62%); /* Liens en Cyan Aqua Hoshino */
+  }
+}
+
+/* ==========================================================================
+   4. ANIMATIONS KEYFRAMES OSHI NO KO
+   ========================================================================== */
+@keyframes onk-star-spin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.08); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes onk-pulse-glow {
+  0%, 100% {
+    filter: drop-shadow(0 0 6px var(--onk-ai-magenta)) drop-shadow(0 0 12px rgba(0, 229, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 12px var(--onk-aqua-cyan)) drop-shadow(0 0 20px rgba(255, 42, 133, 0.8));
+  }
+}
+
+@keyframes onk-gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ==========================================================================
+   5. SCÈNE DE CONCERT & BARRE DE TITRE (WATERMARK OSHI NO KO)
+   ========================================================================== */
+/* Éclairage d'ambiance scénique (Spot Rose en haut à gauche, Spot Cyan en bas à droite) */
+.appMount__51fd7::before {
   content: "";
-  position: absolute;
+  position: fixed;
   inset: 0;
-  background-image: 
-    radial-gradient(rgba(229, 0, 127, 0.14) 1px, transparent 1px),
-    radial-gradient(rgba(0, 240, 255, 0.08) 1px, transparent 1px),
-    linear-gradient(135deg, rgba(8, 4, 17, 0.82) 0%, rgba(16, 5, 32, 0.48) 50%, rgba(6, 12, 26, 0.85) 100%);
-  background-size: 16px 16px, 16px 16px, 100% 100%;
-  background-position: 0 0, 8px 8px, 0 0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 42, 133, 0.18) 0%, transparent 45%),
+    radial-gradient(circle at 88% 92%, rgba(0, 229, 255, 0.16) 0%, transparent 45%),
+    radial-gradient(circle at 50% 50%, rgba(14, 6, 28, 0.25) 0%, rgba(10, 3, 20, 0.55) 100%);
   pointer-events: none;
+  z-index: 0;
 }
 
-/* Trame Halftone subtile sur la barre latérale comme sur le menu d'ichigoproduction.com */
-.sidebarList__5e434 {
-  background-image: 
-    radial-gradient(rgba(229, 0, 127, 0.07) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(10, 4, 22, 0.88) 0%, rgba(8, 3, 18, 0.92) 100%) !important;
-  background-size: 12px 12px, 100% 100% !important;
-  border-right: 1px solid rgba(229, 0, 127, 0.35) !important;
+/* Bordure lumineuse subtile autour du cadre principal */
+.content__5e434 {
+  box-shadow:
+    var(--popout-shadow-border),
+    0 0 35px rgba(255, 42, 133, 0.12),
+    0 0 60px rgba(0, 229, 255, 0.08) !important;
 }
 
-/* ==========================================================================
-   4. LOGO OFFICIEL 【推しの子】 DANS LA BARRE SUPÉRIEURE & BARRE DE RECHERCHE
-   ========================================================================== */
-/* Remplace le petit texte "Messages privés" tout en haut de la fenêtre par le vrai logo officiel */
-[class*="bar_"] [class*="title_"] {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+/* Remplacement du logo "Discord" en haut à gauche par 【OSHI NO KO】 */
+.wordmarkWindows__421ed svg {
+  display: none !important;
 }
-
-[class*="bar_"] [class*="title_"]::before {
-  content: "";
+.wordmarkWindows__421ed::after {
+  content: "★ 【OSHI NO KO】 // B-KOMACHI ★";
   display: inline-block;
-  width: 110px;
-  height: 22px;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/8/80/Oshi_no_Ko_logo.svg");
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  filter: drop-shadow(0 0 6px rgba(229, 0, 127, 0.6));
-}
-
-/* Barre "Recherche ou lance une conversation" stylisée façon bouton officiel 【SEARCH】 */
-.searchBar__35e86 .searchBarComponent__35e86 {
-  background: #0b0418 !important;
-  border: 1px solid var(--ichigo-magenta) !important;
-  border-radius: 4px !important;
-  box-shadow: 3px 3px 0px rgba(0, 240, 255, 0.5) !important;
-  color: #ffffff !important;
-  font-weight: 700 !important;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  font-size: 11px !important;
-  transition: all 0.2s ease !important;
-}
-
-.searchBar__35e86 .searchBarComponent__35e86:hover {
-  background: var(--ichigo-magenta) !important;
-  box-shadow: 3px 3px 0px var(--ichigo-gold) !important;
-  transform: translate(-1px, -1px);
+  padding-inline-start: 10px;
+  line-height: 24px;
+  font-family: var(--font-display);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: var(--onk-gradient-starlight);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: onk-gradient-flow 6s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255, 42, 133, 0.55));
 }
 
 /* ==========================================================================
-   5. LES CROCHETS OFFICIELS 【 ... 】 SUR TOUTES LES SECTIONS (STYLE SITE OFFICIEL)
+   6. BOUTON D'ACCUEIL "ŒIL ÉTOILÉ D'AI HOSHINO" & LISTE DES SERVEURS
    ========================================================================== */
-/* Ajoute automatiquement les crochets 【 】 roses et cyans sur "Messages privés", 
-   les catégories de salons et les rôles ! */
-.privateChannelsHeaderContainer__99e7c > span,
-[class*="containerDefault_"] [class*="name_"] > div,
-.membersGroup_c8ffbb > span {
-  font-family: "Montserrat", "Noto Sans JP", sans-serif !important;
-  font-weight: 900 !important;
-  letter-spacing: 0.1em !important;
-  text-transform: uppercase !important;
-  color: #ffffff !important;
-}
-
-.privateChannelsHeaderContainer__99e7c > span::before,
-.membersGroup_c8ffbb > span::before {
-  content: "【 ";
-  color: var(--ichigo-magenta);
-  font-weight: 900;
-  text-shadow: -1px 0 0 var(--ichigo-cyan);
-}
-
-.privateChannelsHeaderContainer__99e7c > span::after,
-.membersGroup_c8ffbb > span::after {
-  content: " 】";
-  color: var(--ichigo-cyan);
-  font-weight: 900;
-  text-shadow: 1px 0 0 var(--ichigo-magenta);
-}
-
-/* ==========================================================================
-   6. BOUTON HOME : L'ÉTOILE HOSHINO ENCADRÉE FAÇON BADGE ICHIGO PRODUCTION
-   ========================================================================== */
-[data-list-item-id="guildsnav___home"] {
-  background: transparent !important;
-}
-
-[data-list-item-id="guildsnav___home"] [class*="childWrapper_"] {
-  position: relative !important;
-  width: 48px !important;
-  height: 48px !important;
-  background: linear-gradient(135deg, #16052b 0%, #090314 100%) !important;
-  border: 2px solid var(--ichigo-magenta) !important;
-  box-shadow: 3px 3px 0px var(--ichigo-cyan) !important;
-  border-radius: 10px !important;
-  transition: all 0.25s ease !important;
-}
-
-[data-list-item-id="guildsnav___home"] svg {
+/* Masquer le logo Discord par défaut sur le bouton Home */
+.childWrapper__6e9f8 > svg {
   display: none !important;
 }
 
-[data-list-item-id="guildsnav___home"] [class*="childWrapper_"]::before {
+/* Appliquer l'Œil Étoilé d'Ai Hoshino animé sur le bouton Home */
+.childWrapper__6e9f8 {
+  background: radial-gradient(circle, #2b0938 0%, #11031c 100%) !important;
+  box-shadow: inset 0 0 10px rgba(255, 42, 133, 0.6), 0 0 12px rgba(255, 42, 133, 0.4) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.childWrapper__6e9f8::before {
   content: "";
   position: absolute;
-  inset: 0;
-  margin: auto;
-  width: 32px;
-  height: 32px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' stop-color='%23ffffff'/%3E%3Cstop offset='50%25' stop-color='%23ffe6f2'/%3E%3Cstop offset='100%25' stop-color='%23e5007f'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='38' fill='none' stroke='%23e5007f' stroke-width='2.5' stroke-dasharray='5 3'/%3E%3Ccircle cx='50' cy='50' r='23' fill='none' stroke='%2300f0ff' stroke-width='2'/%3E%3Cpolygon points='50,2 58,36 92,24 67,50 92,76 58,64 50,98 42,64 8,76 33,50 8,24 42,36' fill='url(%23g)'/%3E%3Ccircle cx='50' cy='50' r='6.5' fill='%23ffe600'/%3E%3C/svg%3E");
+  width: 82%;
+  height: 82%;
+  background-image: var(--onk-star-eye-svg);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  animation: onk-star-spin 18s linear infinite, onk-pulse-glow 4s ease-in-out infinite;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-[data-list-item-id="guildsnav___home"]:hover [class*="childWrapper_"] {
-  border-color: var(--ichigo-gold) !important;
-  box-shadow: -3px -3px 0px var(--ichigo-magenta), 3px 3px 0px var(--ichigo-cyan) !important;
+.wrapper__6e9f8:hover .childWrapper__6e9f8::before,
+.wrapper__6e9f8.selected__6e9f8 .childWrapper__6e9f8::before {
+  animation: onk-star-spin 3.5s linear infinite, onk-pulse-glow 2s ease-in-out infinite;
+  transform: scale(1.12);
 }
 
-[data-list-item-id="guildsnav___home"]:hover [class*="childWrapper_"]::before {
-  transform: rotate(180deg) scale(1.12);
-}
-
-/* ==========================================================================
-   7. SALONS & MP SÉLECTIONNÉS (STYLE CARTE OFFICIELLE AVEC OMBRE CHROMATIQUE)
-   ========================================================================== */
-[class*="pill_"] span {
-  background: linear-gradient(180deg, var(--ichigo-magenta), var(--ichigo-cyan)) !important;
-  box-shadow: 0 0 8px var(--ichigo-magenta);
-}
-
-/* MP ou Salon sélectionné : Fond noir obsidienne + bordure néon + décalage cyan */
-.channel__972a0 [class*="interactiveSelected_"],
-.modeSelected__2ea32 .link__2ea32 {
-  background: linear-gradient(90deg, rgba(229, 0, 127, 0.35) 0%, rgba(12, 5, 28, 0.92) 85%) !important;
-  border: 1px solid var(--ichigo-magenta) !important;
-  border-left: 4px solid var(--ichigo-cyan) !important;
-  box-shadow: 3px 3px 0px rgba(229, 0, 127, 0.65) !important;
-  border-radius: 6px !important;
-}
-
-.channel__972a0 [class*="interactive_"]:hover:not([class*="interactiveSelected_"]),
-.wrapper__2ea32:hover:not(.modeSelected__2ea32) .link__2ea32 {
-  background: rgba(229, 0, 127, 0.14) !important;
-  border-left: 3px solid var(--ichigo-magenta) !important;
-}
-
-/* ==========================================================================
-   8. HEADER DU CHAT & REFONTE DES MESSAGES (FINI LES GROSSES BRIQUES GRISES)
-   ========================================================================== */
-/* Barre du haut du chat avec la ligne spectrale 4 couleurs d'ichigoproduction.com */
-.title_f75fb0,
-.header_f37cb1 {
-  background: rgba(9, 4, 20, 0.9) !important;
-  border-bottom: 2px solid transparent !important;
-  border-image: linear-gradient(90deg, var(--ichigo-magenta), var(--ichigo-cyan), var(--ichigo-gold), var(--ichigo-violet)) 1 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6) !important;
-}
-
-/* Suppression totale de l'ombre blanche/grise de Translucence sur les messages */
-.cozyMessage__5126c {
-  box-shadow: none !important;
-  margin-right: 18px !important;
-}
-
-/* Premier message d'un groupe (avec avatar et pseudo) : Style Boîte de Dialogue Officielle */
-.message__5126c.groupStart__5126c {
-  background: linear-gradient(90deg, rgba(13, 6, 28, 0.86) 0%, rgba(10, 4, 22, 0.68) 100%) !important;
-  border: 1px solid rgba(229, 0, 127, 0.25) !important;
-  border-left: 3px solid var(--ichigo-magenta) !important;
-  border-radius: 4px 10px 10px 4px !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
-  margin-top: 10px !important;
-}
-
-/* Messages suivants d'une même personne : plus fins, sombres et élégants (pas de gros blocs gris !) */
-.message__5126c:not(.groupStart__5126c) {
-  background: rgba(10, 4, 22, 0.52) !important;
-  border: none !important;
-  border-left: 2px solid rgba(0, 240, 255, 0.35) !important;
-  border-radius: 0 6px 6px 0 !important;
-  margin-top: 2px !important;
-  padding-top: 4px !important;
-  padding-bottom: 4px !important;
-}
-
-.message__5126c:hover {
-  background: rgba(22, 8, 44, 0.88) !important;
-  border-left-color: var(--ichigo-gold) !important;
-  box-shadow: 3px 3px 0px rgba(229, 0, 127, 0.45) !important;
-}
-
-/* --- RÉPONSES (REPLIES) STYLE AQUA CYAN --- */
-[class*="repliedMessage_"] {
-  background: rgba(0, 240, 255, 0.10) !important;
-  border: 1px solid rgba(0, 240, 255, 0.35) !important;
-  border-left: 3px solid var(--ichigo-cyan) !important;
-  padding: 2px 8px !important;
+/* Pilules de notification des serveurs (Dégradé Ruby x Aqua) */
+.item__58105 {
+  background: var(--onk-gradient-vertical) !important;
+  box-shadow: 0 0 10px var(--onk-ai-magenta), 0 0 6px var(--onk-aqua-cyan) !important;
   border-radius: 4px !important;
-  margin-bottom: 4px !important;
-  width: fit-content;
 }
 
-[class*="repliedMessageSpine_"] {
-  border-color: var(--ichigo-cyan) !important;
-}
-
-/* --- MENTIONS (@pseudo) STYLE ÉTIQUETTE OFFICIELLE 【@】 --- */
-.wrapper_f61d60,
-.mention {
-  background: var(--ichigo-magenta) !important;
+/* Badges de mentions numériques */
+.numberBadge__463b7,
+.mention__3b95d {
+  background: linear-gradient(135deg, var(--onk-ai-magenta), var(--onk-ruby-crimson)) !important;
   color: #ffffff !important;
   font-weight: 800 !important;
-  border-radius: 3px !important;
-  padding: 1px 6px !important;
-  box-shadow: 2px 2px 0px var(--ichigo-cyan) !important;
-  text-shadow: none !important;
-  transition: all 0.15s ease;
+  box-shadow: 0 0 12px rgba(255, 42, 133, 0.75) !important;
 }
 
-.wrapper_f61d60:hover,
-.mention:hover {
-  background: var(--ichigo-cyan) !important;
-  color: #080411 !important;
-  box-shadow: 2px 2px 0px var(--ichigo-magenta) !important;
+/* Effet de lueur au survol d'une icône de serveur */
+.wrapper_cc5dd2 {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.25s ease;
 }
-
-/* Message entier qui te mentionne */
-.mentioned__5126c {
-  background: linear-gradient(90deg, rgba(229, 0, 127, 0.28) 0%, rgba(12, 5, 26, 0.85) 100%) !important;
-  border: 1px solid var(--ichigo-magenta) !important;
-  border-left: 4px solid var(--ichigo-gold) !important;
-  box-shadow: 3px 3px 0px var(--ichigo-magenta) !important;
+.wrapper_cc5dd2:hover {
+  transform: translateY(-2px) scale(1.04);
+  filter: drop-shadow(0 4px 12px rgba(255, 42, 133, 0.45));
 }
 
 /* ==========================================================================
-   9. BARRE D'ÉCRITURE (TEXTAREA) FAÇON CONSOLE NOIRE OBSIDIENNE
+   7. SALONS, MESSAGES PRIVÉS & EN-TÊTE DE SERVEUR
    ========================================================================== */
-.scrollableContainer__74017 {
-  background: rgba(9, 4, 20, 0.92) !important;
-  border: 1px solid var(--ichigo-magenta) !important;
-  border-radius: 8px !important;
-  box-shadow: 4px 4px 0px rgba(0, 240, 255, 0.4), 0 8px 24px rgba(0, 0, 0, 0.7) !important;
+/* Ligne lumineuse sous le nom du serveur et la barre de recherche DM */
+.header_f37cb1,
+.searchBar_e6b769,
+.container__9293f {
+  position: relative;
+}
+.header_f37cb1::after,
+.searchBar_e6b769::after,
+.container__9293f::after {
+  content: "";
+  position: absolute;
+  inset-inline: 12px;
+  inset-block-end: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--onk-ai-magenta), var(--onk-aqua-cyan), transparent);
+  opacity: 0.65;
+  pointer-events: none;
 }
 
-.channelTextArea__74017:focus-within .scrollableContainer__74017 {
-  border-color: var(--ichigo-cyan) !important;
-  box-shadow: 4px 4px 0px var(--ichigo-magenta), 0 0 15px rgba(0, 240, 255, 0.3) !important;
+/* Animation des salons et MP au survol / sélection */
+.sidebar__5e434 .link__2ea32,
+.channel__972a0 {
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative;
 }
 
-.placeholder__1b31f::before {
-  content: "【✦】 ";
-  color: var(--ichigo-magenta);
-  font-weight: 900;
+.sidebar__5e434 .link__2ea32:hover,
+.channel__972a0:hover {
+  transform: translateX(5px);
+  background: linear-gradient(90deg, hsla(332, 95%, 60%, 0.22), hsla(188, 95%, 55%, 0.06)) !important;
+  box-shadow: inset 3px 0 0 var(--onk-ai-magenta);
+}
+
+/* Salon sélectionné avec étoile Hoshino */
+.modeSelected__2ea32 .link__2ea32,
+.channel__972a0.selected_a08117,
+.channel__972a0:has([aria-selected="true"]) {
+  background: linear-gradient(90deg, hsla(332, 95%, 58%, 0.34), hsla(188, 95%, 55%, 0.14)) !important;
+  box-shadow:
+    inset 3px 0 0 var(--onk-aqua-cyan),
+    0 4px 14px rgba(255, 42, 133, 0.2) !important;
+}
+
+.modeSelected__2ea32 .link__2ea32::after {
+  content: "✦";
+  position: absolute;
+  inset-inline-end: 10px;
+  color: var(--onk-star-gold);
+  font-size: 13px;
+  text-shadow: 0 0 8px var(--onk-star-gold), 0 0 12px var(--onk-ai-magenta);
+  pointer-events: none;
 }
 
 /* ==========================================================================
-   10. PANNEAU UTILISATEUR, PROFIL & STATUTS
+   8. PANNEAU UTILISATEUR & LECTEUR SPOTIFY VENCORD (B-KOMACHI LIVE)
    ========================================================================== */
 .panels__5e434 {
-  background-color: rgba(9, 4, 20, 0.9) !important;
-  border: 1px solid var(--ichigo-magenta) !important;
-  box-shadow: 3px 3px 0px var(--ichigo-cyan) !important;
-  border-radius: 8px !important;
+  background: linear-gradient(160deg, hsla(280, 60%, 12%, 0.65), hsla(260, 70%, 8%, 0.78)) !important;
+  box-shadow:
+    var(--popout-shadow-border),
+    var(--popout-shadow),
+    0 0 18px rgba(255, 42, 133, 0.18) !important;
 }
 
-/* Espace de défilement en bas des listes pour ne pas cacher le dernier salon/serveur */
-.sidebar__5e434 .guilds__5e434 [class*="scroller_"],
-.sidebar__5e434 [class*="privateChannels_"] [class*="scroller_"],
-.sidebar__5e434 [class*="sidebarList_"] [class*="scroller_"] {
-  padding-bottom: 36px !important;
+/* Lecteur Spotify Vencord (#vc-spotify-player) */
+#vc-spotify-player {
+  position: relative;
+  border-block-end: 1px solid hsla(332, 90%, 70%, 0.2) !important;
+  background: radial-gradient(circle at top right, hsla(332, 95%, 55%, 0.18), transparent 70%) !important;
 }
 
-/* Intégration propre du panneau de profil à droite */
-aside[class*="profilePanel_"],
-[class*="outer_c0bea0"]:not([class*="custom-profile-theme"]) {
+#vc-spotify-player .vc-spotify-button {
+  color: var(--onk-aqua-cyan) !important;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+#vc-spotify-player .vc-spotify-button:hover {
+  color: var(--onk-ai-magenta) !important;
+  transform: scale(1.18);
+  filter: drop-shadow(0 0 8px var(--onk-ai-magenta));
+}
+
+/* Barre de progression Spotify en dégradé Étoilé */
+#vc-spotify-player .barFill_a562c8 {
+  background: var(--onk-gradient-starlight) !important;
+  box-shadow: 0 0 10px var(--onk-ai-magenta) !important;
+}
+
+/* Anneau vocal quand quelqu'un parle (Aura Aqua x Ruby) */
+.userAvatar__55bab[style*="--status-speaking"],
+.border__2f4f7[style*="--status-speaking"] {
+  box-shadow:
+    0 0 14px var(--onk-aqua-cyan),
+    inset 0 0 0 2px var(--onk-ai-magenta),
+    inset 0 0 0 4px var(--onk-aqua-cyan) !important;
+}
+
+/* ==========================================================================
+   9. ZONE DE CHAT & BULLES DE MESSAGES ("STARLIGHT DIALOGUE")
+   ========================================================================== */
+.wrapper_c19a55 {
+  box-shadow:
+    inset 0 1px 0 hsla(330, 100%, 90%, 0.12),
+    0 4px 12px rgba(0, 0, 0, 0.18);
+  transition:
+    background-color 250ms ease,
+    transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    box-shadow 250ms ease !important;
+}
+
+.mouse-mode.full-motion .wrapper_c19a55:hover {
+  transform: translateX(2px);
+  box-shadow:
+    inset 0 1px 0 hsla(332, 100%, 80%, 0.28),
+    inset 3px 0 0 var(--onk-ai-magenta),
+    0 6px 18px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Message avec MENTION (Style Starlight Gold & Magenta + Étoile) */
+.wrapper_c19a55.mentioned__5126c {
+  background: linear-gradient(135deg, hsla(43, 100%, 55%, 0.18) 0%, hsla(332, 95%, 55%, 0.22) 100%) !important;
+  border: 1.5px solid hsla(43, 100%, 60%, 0.85) !important;
+  box-shadow:
+    0 0 18px hsla(43, 100%, 58%, 0.35),
+    inset 0 0 15px hsla(332, 95%, 60%, 0.25) !important;
+  position: relative;
+}
+
+.wrapper_c19a55.mentioned__5126c::after {
+  content: "★ STAR MENTION";
+  position: absolute;
+  inset-block-start: -9px;
+  inset-inline-end: 14px;
+  padding: 1px 8px;
+  font-size: 9.5px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: #14051e;
+  background: linear-gradient(90deg, var(--onk-star-gold), #ff85c0);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(255, 190, 11, 0.6);
+  text-shadow: none;
+  pointer-events: none;
+}
+
+/* Message en cours de RÉPONSE (Style Aqua Hoshino Cyan) */
+.wrapper_c19a55.replying__5126c {
+  background: linear-gradient(135deg, hsla(188, 98%, 50%, 0.2) 0%, hsla(268, 65%, 12%, 0.4) 100%) !important;
+  border: 1.5px solid var(--onk-aqua-cyan) !important;
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.4) !important;
+}
+
+/* Séparateur "NOUVEAUX MESSAGES" */
+.isUnread__908e2 {
+  border-color: var(--onk-ai-magenta) !important;
+  box-shadow: 0 0 10px var(--onk-ai-magenta);
+}
+.isUnread__908e2 .unreadPill__908e2 {
+  background: var(--onk-gradient-twins) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 0 12px rgba(255, 42, 133, 0.65);
+}
+
+/* Barre flottante "Nouveaux Messages" en haut du chat */
+.newMessagesBar__0f481 {
+  background: var(--onk-gradient-twins) !important;
+  box-shadow: 0 6px 20px rgba(255, 42, 133, 0.45) !important;
+}
+
+/* Blocs de code (Markup) stylisés façon Terminal B-Komachi */
+.markup__75297 pre {
+  background-color: hsla(268, 70%, 5%, 0.72) !important;
+  border: 1px solid hsla(332, 85%, 65%, 0.28) !important;
+  box-shadow: inset 0 1px 0 hsla(188, 100%, 70%, 0.2), 0 8px 20px rgba(0, 0, 0, 0.35);
+  position: relative;
+  padding-block-start: 26px !important;
+}
+.markup__75297 pre::before {
+  content: "● ● ●   ★ OSHI NO KO // CODE STAGE";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 24px;
+  line-height: 24px;
+  padding-inline: 12px;
+  font-family: var(--font-display);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: var(--onk-aqua-cyan);
+  background: linear-gradient(90deg, hsla(332, 90%, 55%, 0.28), hsla(188, 90%, 50%, 0.15));
+  border-block-end: 1px solid hsla(332, 85%, 65%, 0.22);
+  border-radius: var(--card-radius) var(--card-radius) 0 0;
+}
+
+/* ==========================================================================
+   10. BARRE D'ÉCRITURE PRINCIPALE (TEXTAREA)
+   ========================================================================== */
+.channelTextArea__74017 {
+  transition:
+    background-color 250ms ease,
+    box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 250ms ease !important;
+}
+
+.channelTextArea__74017:focus-within {
+  transform: translateY(-1px);
+  box-shadow:
+    var(--liquid-glass-shadow),
+    0 0 0 1.5px hsla(332, 95%, 65%, 0.75),
+    0 0 22px hsla(332, 95%, 60%, 0.38),
+    0 0 36px hsla(188, 98%, 55%, 0.22) !important;
+}
+
+/* ==========================================================================
+   11. BOUTONS, BADGES BOTS, RÔLES & MEMBRES
+   ========================================================================== */
+/* Boutons principaux avec dégradé Idol au survol */
+.lookFilled__201d5:hover,
+.primary_a22cb0:hover,
+.bd-button:hover {
+  background: var(--onk-gradient-twins) !important;
+  box-shadow:
+    var(--liquid-glass-shadow),
+    0 0 18px rgba(255, 42, 133, 0.55) !important;
+}
+
+/* Badge BOT / APP avec étoile Oshi no Ko */
+.botTag__82f07.botTagRegular__82f07 {
+  background: var(--onk-gradient-twins) !important;
+  color: #ffffff !important;
+  font-weight: 700;
+  box-shadow: 0 0 10px rgba(255, 42, 133, 0.5);
+  padding-inline: 6px !important;
+}
+.botTag__82f07.botTagRegular__82f07 .botText__82f07::before {
+  content: "★ ";
+  color: var(--onk-star-gold);
+}
+
+/* Pilules de rôles dans les profils */
+.role_dfa8b6,
+.role__5d7c9,
+.role_b4b2c3 {
+  background-color: hsla(280, 50%, 15%, 0.55) !important;
+  border: 1px solid hsla(332, 80%, 70%, 0.25) !important;
+  box-shadow: inset 0 1px 1px hsla(0, 0%, 100%, 0.12);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.role_dfa8b6:hover,
+.role__5d7c9:hover,
+.role_b4b2c3:hover {
+  transform: translateY(-1px);
+  border-color: var(--onk-aqua-cyan) !important;
+}
+
+/* Avatars des membres au survol */
+.member__5d473 .layout__91a9d {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.member__5d473:hover .layout__91a9d {
+  transform: translateX(-3px);
+  background: linear-gradient(90deg, hsla(332, 90%, 60%, 0.22), transparent) !important;
+}
+
+/* ==========================================================================
+   12. MENUS CONTEXTUELS, POPOUTS PROFILS & TOOLTIPS
+   ========================================================================== */
+/* Survol d'une option dans le clic-droit (Menu contextuel) */
+.menu_c1e9c4 .item_c1e9c4 {
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+.menu_c1e9c4 .item_c1e9c4.focused_c1e9c4:not(.colorDanger_c1e9c4) {
+  background: linear-gradient(90deg, hsla(332, 95%, 58%, 0.78), hsla(188, 95%, 50%, 0.55)) !important;
+  color: #ffffff !important;
+  transform: translateX(3px);
+  box-shadow: 0 4px 12px rgba(255, 42, 133, 0.35);
+}
+
+/* Infobulles (Tooltips) en dégradé Idol */
+.tooltip_fa450d {
+  background: linear-gradient(135deg, hsla(332, 92%, 54%, 0.92), hsla(272, 85%, 38%, 0.92)) !important;
+  border: 1px solid hsla(330, 100%, 85%, 0.4);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5), 0 0 14px rgba(255, 42, 133, 0.45) !important;
+}
+
+/* Popout Profil Utilisateur (Sans thème Nitro perso) */
+.user-profile-popout:not(.custom-user-profile-theme) {
+  background:
+    radial-gradient(circle at top right, hsla(332, 95%, 58%, 0.22), transparent 55%),
+    radial-gradient(circle at bottom left, hsla(188, 95%, 55%, 0.18), transparent 55%),
+    var(--popout-color) !important;
+}
+
+/* ==========================================================================
+   13. BARRES DE DÉFILEMENT PERSONNALISÉES (SCROLLBARS AQUA X RUBY)
+   ========================================================================== */
+::-webkit-scrollbar {
+  width: var(--scrollbar-width) !important;
+  height: var(--scrollbar-width) !important;
+}
+
+::-webkit-scrollbar-track {
   background: transparent !important;
+  margin-block: 6px;
 }
 
-/* Statuts Utilisateur aux couleurs officielles (Cyan, Or, Magenta, Violet sombre) */
-svg > rect[fill="#23a55a"], svg > rect[fill="#43a25a"],
-svg > polygon[fill="#23a55a"], svg > path[fill="#23a55a"] {
-  fill: var(--ichigo-cyan) !important;
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, hsla(332, 95%, 60%, 0.45), hsla(188, 95%, 55%, 0.45)) !important;
+  border-radius: 10px !important;
+  border: 2px solid transparent !important;
+  background-clip: padding-box !important;
 }
 
-svg > rect[fill="#f0b232"], svg > rect[fill="#ca9654"],
-svg > polygon[fill="#f0b232"], svg > path[fill="#f0b232"] {
-  fill: var(--ichigo-gold) !important;
-}
-
-svg > rect[fill="#f23f43"], svg > rect[fill="#d83a42"],
-svg > polygon[fill="#f23f43"], svg > path[fill="#f23f43"] {
-  fill: var(--ichigo-magenta) !important;
-}
-
-svg > rect[fill="#80848e"], svg > rect[fill="#82858f"] {
-  fill: #5c4b73 !important;
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--onk-ai-magenta), var(--onk-aqua-cyan)) !important;
+  box-shadow: 0 0 10px var(--onk-ai-magenta) !important;
 }
