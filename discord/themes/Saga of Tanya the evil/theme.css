@@ -1,0 +1,438 @@
+/**
+ * @name Saga of Tanya the Evil - Type 95 Imperial OS
+ * @author Custom Vencord Theme
+ * @version 2.0.0
+ * @description Thème ultra poussé Youjo Senki : Esthétique militaire impériale, Orbe d'Élenium Type 95 animé, glassmorphisme et interface tactique.
+ */
+
+/* ==========================================================================
+   1. IMPORTATION DES POLICES (Impériale, Tactique & Télégramme)
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+
+/* ==========================================================================
+   2. VARIABLES GLOBALES & PALETTE DE COULEURS
+   ========================================================================== */
+:root {
+    /* --- IMAGE DE FOND (Tu peux remplacer l'URL par ton fond préféré) --- */
+    --tanya-wallpaper: url('https://images8.alphacoders.com/806/806389.jpg');
+    --tanya-Filter-Brightness: 0.28; /* Assombrit le fond pour la lisibilité */
+    --tanya-Blur: 6px; /* Flou des panneaux */
+
+    /* --- PALETTE DE COULEURS IMPÉRIALE --- */
+    --imperial-bg-dark: rgba(10, 14, 12, 0.78);      /* Vert Feldgrau très sombre */
+    --imperial-bg-secondary: rgba(16, 22, 18, 0.82); /* Panneaux secondaires */
+    --imperial-bg-tertiary: rgba(6, 9, 7, 0.88);     /* Liste des serveurs */
+    --imperial-surface: rgba(24, 33, 27, 0.65);      /* Cartes et survols */
+
+    /* --- ORBE D'ÉLENIUM TYPE 95 (Or & Magie) --- */
+    --type95-gold: #e5c158;
+    --type95-gold-bright: #ffdf73;
+    --type95-gold-glow: rgba(229, 193, 88, 0.45);
+    --type95-gold-dim: rgba(229, 193, 88, 0.15);
+    --magic-cyan: #00e5ff; /* Magie de vol standard */
+
+    /* --- SANG & GUERRE (Mentions / Alertes) --- */
+    --imperial-crimson: #9e1b1b;
+    --imperial-crimson-bright: #ff2a2a;
+    --imperial-crimson-glow: rgba(255, 42, 42, 0.35);
+
+    /* --- TEXTES & POLICES --- */
+    --font-primary: 'Rajdhani', sans-serif !important;
+    --font-display: 'Cinzel', serif !important;
+    --font-code: 'Share Tech Mono', monospace !important;
+
+    --text-normal: #e8e6df;
+    --text-muted: #8c968e;
+    --header-primary: var(--type95-gold-bright);
+    --header-secondary: #b8b29e;
+    --channels-default: #9aa69d;
+    --interactive-normal: #b0b8b2;
+    --interactive-hover: var(--type95-gold-bright);
+    --interactive-active: #ffffff;
+
+    /* --- SURCHARGE DES VARIABLES DISCORD --- */
+    --background-primary: transparent;
+    --background-secondary: transparent;
+    --background-secondary-alt: transparent;
+    --background-tertiary: transparent;
+    --background-floating: rgba(12, 17, 14, 0.96);
+    --background-modifier-hover: rgba(229, 193, 88, 0.08);
+    --background-modifier-active: rgba(229, 193, 88, 0.16);
+    --background-modifier-selected: rgba(229, 193, 88, 0.22);
+    --background-modifier-accent: rgba(229, 193, 88, 0.2);
+    --bg-overlay-chat: transparent;
+    --bg-base-primary: transparent;
+    --bg-base-secondary: transparent;
+    --bg-base-tertiary: transparent;
+    --channeltextarea-background: rgba(10, 14, 11, 0.85);
+
+    --brand-experiment: var(--type95-gold);
+    --brand-500: var(--type95-gold);
+    --brand-560: var(--type95-gold-bright);
+    --status-danger: var(--imperial-crimson-bright);
+
+    /* --- SVG ENCODÉ : CERCLE MAGIQUE TYPE 95 --- */
+    --magic-circle-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e5c158' stroke-width='1.5'%3E%3Ccircle cx='100' cy='100' r='92' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='84' stroke-dasharray='6 3'/%3E%3Ccircle cx='100' cy='100' r='68'/%3E%3Cpolygon points='100,16 172,142 28,142' stroke-width='1.5'/%3E%3Cpolygon points='100,184 172,58 28,58' stroke-width='1.5'/%3E%3Crect x='52' y='52' width='96' height='96' transform='rotate(45 100 100)' stroke-dasharray='4 2'/%3E%3Ccircle cx='100' cy='100' r='32' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='10' fill='%23e5c158'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   3. ANIMATIONS (Orbe Type 95 & Pulsations Magiques)
+   ========================================================================== */
+@keyframes rotateMagicCircle {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes rotateHomeIcon {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(180deg) scale(1.08); }
+    100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes pulseGoldGlow {
+    0%, 100% { box-shadow: 0 0 8px var(--type95-gold-glow), inset 0 0 5px var(--type95-gold-dim); }
+    50% { box-shadow: 0 0 16px var(--type95-gold), inset 0 0 10px var(--type95-gold-glow); }
+}
+
+/* ==========================================================================
+   4. ARRIÈRE-PLAN GLOBAL & FILIGRANE MAGIQUE
+   ========================================================================== */
+body, #app-mount {
+    background: #070a08 !important;
+    font-family: var(--font-primary);
+    letter-spacing: 0.3px;
+}
+
+/* Fond d'écran principal avec filtre tactique */
+#app-mount::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: 
+        radial-gradient(circle at center, transparent 20%, rgba(5, 8, 6, 0.92) 100%),
+        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
+        var(--tanya-wallpaper);
+    background-size: cover, 100% 3px, cover;
+    background-position: center;
+    filter: brightness(var(--tanya-Filter-Brightness)) contrast(1.15) sepia(0.15);
+    z-index: -2;
+    pointer-events: none;
+}
+
+/* Grand Cercle Magique d'Élenium qui tourne lentement derrière le chat */
+#app-mount::after {
+    content: "";
+    position: fixed;
+    top: 50%;
+    left: 55%;
+    width: 580px;
+    height: 580px;
+    background-image: var(--magic-circle-svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.07;
+    filter: drop-shadow(0 0 15px var(--type95-gold));
+    animation: rotateMagicCircle 90s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* Nettoyage des fonds par défaut de Discord */
+[class*="bg_"],
+[class*="app_"],
+[class*="layer_"],
+[class*="standardSidebarView_"] {
+    background: transparent !important;
+}
+
+/* ==========================================================================
+   5. STRUCTURE EN PANNEAUX TACTIQUES (Glassmorphisme & Bordures d'Or)
+   ========================================================================== */
+/* Barre des serveurs */
+nav[class*="guilds_"] {
+    background: var(--imperial-bg-tertiary) !important;
+    backdrop-filter: blur(var(--tanya-Blur));
+    border-right: 1px solid rgba(229, 193, 88, 0.25);
+    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.6);
+}
+
+/* Barre des salons (Sidebar) */
+[class*="sidebar_"] {
+    background: var(--imperial-bg-secondary) !important;
+    backdrop-filter: blur(var(--tanya-Blur));
+    margin: 8px 0 8px 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(229, 193, 88, 0.22);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+}
+
+/* Zone principale de Chat */
+main[class*="chatContent_"],
+[class*="chat_"] {
+    background: var(--imperial-bg-dark) !important;
+    backdrop-filter: blur(var(--tanya-Blur));
+}
+
+[class*="chat_"] {
+    margin: 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(229, 193, 88, 0.22);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
+    overflow: hidden;
+}
+
+/* En-tête du salon (Header) */
+section[class*="title_"],
+header[class*="header_"] {
+    background: linear-gradient(90deg, rgba(16, 23, 18, 0.9) 0%, rgba(229, 193, 88, 0.1) 50%, rgba(16, 23, 18, 0.9) 100%) !important;
+    border-bottom: 1px solid rgba(229, 193, 88, 0.35) !important;
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+}
+
+/* Liste des membres (à droite) */
+[class*="membersWrap_"],
+[class*="members_"] {
+    background: rgba(12, 16, 13, 0.6) !important;
+    border-left: 1px solid rgba(229, 193, 88, 0.2);
+}
+
+/* ==========================================================================
+   6. BOUTON D'ACCUEIL : ORBE DE CALCUL TYPE 95
+   ========================================================================== */
+/* Cache le logo Discord de base */
+[class*="tutorialContainer_"] [class*="childWrapper_"] svg {
+    display: none !important;
+}
+
+/* Remplace par le Cercle Magique Doré Animé */
+[class*="tutorialContainer_"] [class*="childWrapper_"] {
+    background-color: rgba(15, 20, 16, 0.9) !important;
+    background-image: var(--magic-circle-svg) !important;
+    background-size: 82% !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    border: 1px solid var(--type95-gold);
+    border-radius: 50% !important;
+    box-shadow: 0 0 12px var(--type95-gold-glow);
+    animation: rotateHomeIcon 20s linear infinite;
+    transition: all 0.3s ease;
+}
+
+[class*="tutorialContainer_"]:hover [class*="childWrapper_"] {
+    animation-duration: 4s;
+    box-shadow: 0 0 22px var(--type95-gold-bright), 0 0 8px var(--imperial-crimson-bright);
+    border-color: #fff;
+}
+
+/* ==========================================================================
+   7. SALONS & CATÉGORIES (Style Grade Militaire)
+   ========================================================================== */
+/* Titres des catégories */
+[class*="containerDefault_"] [class*="name_"] {
+    font-family: var(--font-display);
+    color: var(--type95-gold) !important;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-shadow: 0 0 6px rgba(229, 193, 88, 0.3);
+}
+
+/* Salons individuels */
+[class*="link_"] {
+    border-radius: 2px !important;
+    border-left: 2px solid transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Survol d'un salon */
+[class*="wrapper_"]:hover [class*="link_"] {
+    background: linear-gradient(90deg, rgba(229, 193, 88, 0.18) 0%, transparent 100%) !important;
+    border-left: 2px solid var(--type95-gold);
+    transform: translateX(3px);
+}
+
+/* Salon sélectionné */
+[class*="modeSelected_"] [class*="link_"] {
+    background: linear-gradient(90deg, rgba(229, 193, 88, 0.32) 0%, rgba(158, 27, 27, 0.15) 100%) !important;
+    border-left: 3px solid var(--type95-gold-bright);
+    box-shadow: inset 0 0 12px rgba(229, 193, 88, 0.15);
+}
+
+[class*="modeSelected_"] [class*="name_"] {
+    color: var(--type95-gold-bright) !important;
+    font-weight: 700;
+    text-shadow: 0 0 8px var(--type95-gold-glow);
+}
+
+/* Indicateurs de salons non lus (Balles traçantes dorées) */
+[class*="unread_"] {
+    background-color: var(--type95-gold-bright) !important;
+    box-shadow: 0 0 10px var(--type95-gold-bright);
+}
+
+/* ==========================================================================
+   8. MESSAGES, MENTIONS & ZONE DE SAISIE (Télégramme Impérial)
+   ========================================================================== */
+/* Survol d'un message */
+[class*="message_"]:hover {
+    background: linear-gradient(90deg, rgba(229, 193, 88, 0.07) 0%, transparent 90%) !important;
+    border-left: 2px solid rgba(229, 193, 88, 0.5);
+}
+
+/* Noms d'utilisateurs dans le chat */
+[class*="username_"] {
+    font-family: var(--font-display);
+    font-weight: 700 !important;
+    letter-spacing: 0.6px;
+}
+
+/* Horodatage style rapport militaire */
+[class*="timestamp_"] {
+    font-family: var(--font-code) !important;
+    color: var(--type95-gold) !important;
+    opacity: 0.75;
+}
+
+/* Message qui te mentionne (Alerte Rouge Impériale) */
+[class*="mentioned_"] {
+    background: linear-gradient(90deg, rgba(158, 27, 27, 0.35) 0%, rgba(229, 193, 88, 0.08) 100%) !important;
+    border-left: 3px solid var(--imperial-crimson-bright) !important;
+    box-shadow: inset 4px 0 15px rgba(255, 42, 42, 0.15);
+}
+
+[class*="mentioned_"]::before {
+    background-color: var(--imperial-crimson-bright) !important;
+    box-shadow: 0 0 10px var(--imperial-crimson-bright);
+}
+
+/* Blocs de code (Style terminal de décryptage militaire) */
+code, [class*="codeView_"] {
+    font-family: var(--font-code) !important;
+    background: rgba(8, 12, 9, 0.92) !important;
+    border: 1px solid rgba(229, 193, 88, 0.35) !important;
+    border-left: 3px solid var(--type95-gold) !important;
+    color: #dfdbc8 !important;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
+}
+
+/* Citations (Blockquotes) */
+[class*="blockquoteContainer_"] [class*="blockquoteDivider_"] {
+    background-color: var(--type95-gold) !important;
+    box-shadow: 0 0 8px var(--type95-gold-glow);
+}
+
+/* Barre d'écriture (Input de message) */
+[class*="channelTextArea_"] [class*="scrollableContainer_"] {
+    background: rgba(10, 14, 11, 0.88) !important;
+    border: 1px solid rgba(229, 193, 88, 0.4) !important;
+    border-radius: 3px !important;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(229, 193, 88, 0.05);
+    transition: all 0.25s ease;
+}
+
+[class*="channelTextArea_"]:focus-within [class*="scrollableContainer_"] {
+    border-color: var(--type95-gold-bright) !important;
+    box-shadow: 0 0 15px var(--type95-gold-glow), inset 0 0 8px rgba(229, 193, 88, 0.12);
+}
+
+/* ==========================================================================
+   9. PANNEAU UTILISATEUR (Carte d'Officier Impérial - Bas Gauche)
+   ========================================================================== */
+section[class*="panels_"] {
+    background: linear-gradient(135deg, rgba(18, 25, 20, 0.95) 0%, rgba(10, 13, 11, 0.98) 100%) !important;
+    border: 1px solid var(--type95-gold) !important;
+    border-radius: 3px !important;
+    margin: 6px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8), inset 0 0 8px var(--type95-gold-dim);
+    position: relative;
+}
+
+/* Inscription "DIVISION 203" en haut du panneau utilisateur */
+section[class*="panels_"]::before {
+    content: "IMPERIAL MAGE BATTALION // 203RD";
+    display: block;
+    font-family: var(--font-code);
+    font-size: 9px;
+    letter-spacing: 2px;
+    color: var(--type95-gold);
+    background: rgba(229, 193, 88, 0.12);
+    padding: 3px 8px;
+    border-bottom: 1px solid rgba(229, 193, 88, 0.25);
+    text-align: center;
+}
+
+/* ==========================================================================
+   10. GROUPES DE MEMBRES, BADGES & BARRES DE DÉFILEMENT
+   ========================================================================== */
+/* Rôles dans la liste des membres */
+[class*="membersGroup_"] {
+    font-family: var(--font-display);
+    color: var(--type95-gold) !important;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(229, 193, 88, 0.25);
+    padding-bottom: 4px;
+    margin-top: 12px;
+}
+
+/* Badges de notification (Mentions rouges incandescentes) */
+[class*="numberBadge_"] {
+    background-color: var(--imperial-crimson-bright) !important;
+    color: #fff !important;
+    font-family: var(--font-code);
+    font-weight: bold;
+    border: 1px solid var(--type95-gold-bright);
+    box-shadow: 0 0 10px var(--imperial-crimson-bright);
+}
+
+/* Popups, Menus déroulants et Modales */
+[class*="menu_"],
+[class*="modal_"],
+[class*="popout_"],
+[class*="userProfileOuter_"] {
+    background: rgba(12, 16, 13, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--type95-gold) !important;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 15px var(--type95-gold-dim) !important;
+}
+
+/* Boutons standards */
+button[class*="lookFilled_"][class*="colorBrand_"] {
+    background: linear-gradient(135deg, #b38f2d 0%, #e5c158 50%, #9e7b1c 100%) !important;
+    color: #0a0e0c !important;
+    font-family: var(--font-display);
+    font-weight: 800 !important;
+    letter-spacing: 1px;
+    border: 1px solid #fff3c4;
+    box-shadow: 0 0 10px var(--type95-gold-glow);
+    transition: all 0.2s ease;
+}
+
+button[class*="lookFilled_"][class*="colorBrand_"]:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 18px var(--type95-gold-bright);
+    transform: translateY(-1px);
+}
+
+/* Barres de défilement (Scrollbars en laiton) */
+::-webkit-scrollbar {
+    width: 6px !important;
+    height: 6px !important;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(8, 11, 9, 0.6) !important;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(180deg, var(--type95-gold) 0%, #7a6018 100%) !important;
+    border-radius: 2px !important;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--type95-gold-bright) !important;
+    box-shadow: 0 0 8px var(--type95-gold);
+}
