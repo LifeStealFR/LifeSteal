@@ -25,7 +25,7 @@
     --app-bg: 
         radial-gradient(circle at 65% 40%, rgba(229, 193, 88, 0.04) 0%, rgba(5, 8, 6, 0.42) 92%),
         url("https://c4.wallpaperflare.com/wallpaper/461/1004/882/tanya-degurechaff-youjo-senki-military-uniform-rifle-wallpaper-preview.jpg"),
-        url("https://images5.alphacoders.com/792/thumb-1920-792410.png");
+        url("https://img.lifestealmc.fr/cdn/i9ova09u.jpg");
 
     /* --- SUPPRESSION DU FLOU & DIMENSIONS DU CADRE --- */
     --app-blur: 0px; /* 0px = Image 100% nette ! */
