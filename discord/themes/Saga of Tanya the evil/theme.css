@@ -1,438 +1,335 @@
 /**
- * @name Saga of Tanya the Evil - Type 95 Imperial OS
- * @author Custom Vencord Theme
- * @version 2.0.0
- * @description Thème ultra poussé Youjo Senki : Esthétique militaire impériale, Orbe d'Élenium Type 95 animé, glassmorphisme et interface tactique.
+ * @name Saga of Tanya the Evil - Imperial Type 95 (Liquid Glass)
+ * @author Custom Vencord Theme (Base: LifeSteal source.css)
+ * @version 3.0.0
+ * @description Thème ultra poussé Youjo Senki basé sur source.css : Verre liquide à reflets d'or Type 95, cercle magique animé et HUD tactique du 203e Bataillon.
  */
 
 /* ==========================================================================
-   1. IMPORTATION DES POLICES (Impériale, Tactique & Télégramme)
+   1. IMPORTATIONS OBLIGATOIRES (Toujours tout en haut du fichier)
    ========================================================================== */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap');
+@import url("https://raw.githubusercontent.com/LifeStealFR/LifeSteal/refs/heads/main/discord/themes/source.css");
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Rajdhani:wght@500;600;700&family=Share+Tech+Mono&display=swap");
 
 /* ==========================================================================
-   2. VARIABLES GLOBALES & PALETTE DE COULEURS
+   2. CONFIGURATION DU MOTEUR SOURCE.CSS (Palette Tanya & Liquid Glass Doré)
    ========================================================================== */
 :root {
-    /* --- IMAGE DE FOND (Tu peux remplacer l'URL par ton fond préféré) --- */
-    --tanya-wallpaper: url('https://images8.alphacoders.com/806/806389.jpg');
-    --tanya-Filter-Brightness: 0.28; /* Assombrit le fond pour la lisibilité */
-    --tanya-Blur: 6px; /* Flou des panneaux */
+    /* --- FOND D'ÉCRAN TANYA DEGURECHAFF (Avec assombrissement tactique + secours) --- 
+       Autres fonds disponibles (remplace le lien dans url(...) si tu veux changer) :
+       - Tanya Sourire Démoniaque : https://c4.wallpaperflare.com/wallpaper/495/678/533/anime-youjo-senki-saga-of-tanya-the-evil-tanya-degurechaff-wallpaper-preview.jpg
+       - Tanya Champ de Bataille  : https://c4.wallpaperflare.com/wallpaper/469/628/855/youjo-senki-tanya-degurechaff-anime-wallpaper-preview.jpg
+       - Tanya AlphaCoders 1      : https://images5.alphacoders.com/792/thumb-1920-792410.png
+       - Tanya AlphaCoders 2      : https://images6.alphacoders.com/792/792413.png
+    */
+    --app-bg: 
+        radial-gradient(circle at 60% 45%, rgba(229, 193, 88, 0.08) 0%, rgba(6, 10, 8, 0.78) 85%),
+        linear-gradient(135deg, rgba(8, 12, 9, 0.50) 0%, rgba(15, 12, 6, 0.65) 100%),
+        url("https://c4.wallpaperflare.com/wallpaper/461/1004/882/tanya-degurechaff-youjo-senki-military-uniform-rifle-wallpaper-preview.jpg"),
+        url("https://images5.alphacoders.com/792/thumb-1920-792410.png");
 
-    /* --- PALETTE DE COULEURS IMPÉRIALE --- */
-    --imperial-bg-dark: rgba(10, 14, 12, 0.78);      /* Vert Feldgrau très sombre */
-    --imperial-bg-secondary: rgba(16, 22, 18, 0.82); /* Panneaux secondaires */
-    --imperial-bg-tertiary: rgba(6, 9, 7, 0.88);     /* Liste des serveurs */
-    --imperial-surface: rgba(24, 33, 27, 0.65);      /* Cartes et survols */
+    /* --- DIMENSIONS & FLOU DU CADRE (Variables source.css) --- */
+    --app-blur: 8px;
+    --app-margin: 18px;
+    --app-radius: 14px;
+    --main-rgb: 8, 13, 10; /* Vert Feldgrau Impérial très sombre */
+    --main-content-opacity: 0.48;
+    --sidebar-opacity: 0.62;
+    --main-content-color: rgba(var(--main-rgb), var(--main-content-opacity));
+    --sidebar-color: rgba(var(--main-rgb), var(--sidebar-opacity));
 
-    /* --- ORBE D'ÉLENIUM TYPE 95 (Or & Magie) --- */
-    --type95-gold: #e5c158;
-    --type95-gold-bright: #ffdf73;
-    --type95-gold-glow: rgba(229, 193, 88, 0.45);
-    --type95-gold-dim: rgba(229, 193, 88, 0.15);
-    --magic-cyan: #00e5ff; /* Magie de vol standard */
+    /* --- COULEUR D'ACCENTUATION : OR DE L'ORBE TYPE 95 (HSL) --- */
+    --accent-hue: 45;
+    --accent-saturation: 82%;
+    --accent-lightness: 58%;
+    --accent-hsl: var(--accent-hue), calc(var(--accent-saturation) * var(--saturation-factor, 1)), var(--accent-lightness);
+    --accent-opacity: 0.9;
+    --accent-text-color: hsl(140, 25%, 6%);
+    --accent-secondary-text-color: hsl(45, 60%, 92%);
 
-    /* --- SANG & GUERRE (Mentions / Alertes) --- */
-    --imperial-crimson: #9e1b1b;
-    --imperial-crimson-bright: #ff2a2a;
-    --imperial-crimson-glow: rgba(255, 42, 42, 0.35);
+    /* --- COULEUR D'ALERTE : ROUGE SANG IMPÉRIAL (HSL) --- */
+    --alert-hue: 358;
+    --alert-saturation: 80%;
+    --alert-lightness: 48%;
+    --alert-hsl: var(--alert-hue), calc(var(--alert-saturation) * var(--saturation-factor, 1)), var(--alert-lightness);
+    --alert-opacity: 0.9;
+    --alert-action-color: hsl(45, 100%, 75%);
+    --alert-text-color: hsl(0, 0%, 100%);
 
-    /* --- TEXTES & POLICES --- */
+    /* --- MENTIONS & RÉPONSES --- */
+    --mention-hue: 358; /* Mentions en rouge impérial */
+    --mention-saturation: 85%;
+    --mention-lightness: 55%;
+    --mention-opacity: 1;
+
+    --reply-hue: 45; /* Réponses en or Type 95 */
+    --reply-saturation: 85%;
+    --reply-lightness: 60%;
+    --reply-opacity: 1;
+
+    /* --- MESSAGES & SALONS --- */
+    --message-color: hsla(140, 20%, 6%, 0.42);
+    --message-color-hover: hsla(45, 65%, 35%, 0.22);
+    --message-radius: 10px;
+    --list-item-radius: 8px;
+    --notification-color: hsl(45, 95%, 68%);
+
+    /* --- ZONE DE SAISIE (TEXTAREA) --- */
+    --textarea-color: 18, 25, 20;
+    --textarea-alpha: 0.68;
+    --textarea-alpha-focus: 0.88;
+    --textarea-text-color: hsl(45, 30%, 94%);
+    --textarea-placeholder-color: hsl(45, 20%, 65%);
+    --textarea-radius: 14px;
+    --textarea-block-color: hsla(140, 25%, 5%, 0.75);
+    --textarea-block-text-color: #e5c158;
+
+    /* --- CARTES, BOUTONS & POPOUTS --- */
+    --card-color: hsla(140, 18%, 10%, 0.48);
+    --card-color-hover: hsla(45, 75%, 55%, 0.16);
+    --card-color-select: hsla(45, 85%, 58%, 0.26);
+    --card-radius: 12px;
+    --button-radius: 10px;
+
+    --popout-color: hsla(140, 22%, 7%, 0.82);
+    --popout-blur: 10px;
+    --popout-radius: 14px;
+    --popout-shadow: 0 20px 50px hsla(0, 0%, 0%, 0.75), 0 0 18px hsla(45, 80%, 55%, 0.18);
+    --popout-shadow-border: 
+        inset 0 1px 1px hsla(45, 95%, 72%, 0.45), 
+        inset 0 -1px 2px hsla(0, 0%, 0%, 0.65), 
+        inset 0 0 0 1px hsla(45, 80%, 55%, 0.22);
+
+    /* --- EFFET LIQUID GLASS DORÉ (Surcharge des reflets source.css) --- */
+    --c-glass: hsl(45, 55%, 65%);
+    --c-light: hsl(45, 100%, 78%);
+    --c-dark: hsl(140, 30%, 4%);
+    --glass-reflex-dark: 2.2;
+    --glass-reflex-light: 0.42;
+    --light-angle: 42deg;
+    --liquid-glass-saturation: 160%;
+
+    /* --- SCROLLBAR EN LAITON --- */
+    --scrollbar-color: 229, 193, 88;
+    --scrollbar-opacity: 0.35;
+    --scrollbar-opacity-hover: 0.65;
+    --scrollbar-width: 8px;
+
+    /* --- POLICES PERSONNALISÉES --- */
     --font-primary: 'Rajdhani', sans-serif !important;
     --font-display: 'Cinzel', serif !important;
     --font-code: 'Share Tech Mono', monospace !important;
 
-    --text-normal: #e8e6df;
-    --text-muted: #8c968e;
-    --header-primary: var(--type95-gold-bright);
-    --header-secondary: #b8b29e;
-    --channels-default: #9aa69d;
-    --interactive-normal: #b0b8b2;
-    --interactive-hover: var(--type95-gold-bright);
-    --interactive-active: #ffffff;
+    /* --- VARIABLES INTERNES TANYA --- */
+    --type95-gold: #e5c158;
+    --type95-gold-bright: #ffdf73;
+    --type95-gold-glow: rgba(229, 193, 88, 0.45);
+    --imperial-crimson: #ff2a2a;
 
-    /* --- SURCHARGE DES VARIABLES DISCORD --- */
-    --background-primary: transparent;
-    --background-secondary: transparent;
-    --background-secondary-alt: transparent;
-    --background-tertiary: transparent;
-    --background-floating: rgba(12, 17, 14, 0.96);
-    --background-modifier-hover: rgba(229, 193, 88, 0.08);
-    --background-modifier-active: rgba(229, 193, 88, 0.16);
-    --background-modifier-selected: rgba(229, 193, 88, 0.22);
-    --background-modifier-accent: rgba(229, 193, 88, 0.2);
-    --bg-overlay-chat: transparent;
-    --bg-base-primary: transparent;
-    --bg-base-secondary: transparent;
-    --bg-base-tertiary: transparent;
-    --channeltextarea-background: rgba(10, 14, 11, 0.85);
+    /* --- SVG CERCLE MAGIQUE D'ÉLENIUM TYPE 95 --- */
+    --magic-circle-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e5c158' stroke-width='1.5'%3E%3Ccircle cx='100' cy='100' r='94' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='86' stroke-dasharray='6 3'/%3E%3Ccircle cx='100' cy='100' r='70'/%3E%3Cpolygon points='100,14 174,143 26,143' stroke-width='1.5'/%3E%3Cpolygon points='100,186 174,57 26,57' stroke-width='1.5'/%3E%3Crect x='50' y='50' width='100' height='100' transform='rotate(45 100 100)' stroke-dasharray='4 2'/%3E%3Ccircle cx='100' cy='100' r='34' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='10' fill='%23e5c158'/%3E%3C/g%3E%3C/svg%3E");
+}
 
-    --brand-experiment: var(--type95-gold);
-    --brand-500: var(--type95-gold);
-    --brand-560: var(--type95-gold-bright);
-    --status-danger: var(--imperial-crimson-bright);
-
-    /* --- SVG ENCODÉ : CERCLE MAGIQUE TYPE 95 --- */
-    --magic-circle-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cg fill='none' stroke='%23e5c158' stroke-width='1.5'%3E%3Ccircle cx='100' cy='100' r='92' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='84' stroke-dasharray='6 3'/%3E%3Ccircle cx='100' cy='100' r='68'/%3E%3Cpolygon points='100,16 172,142 28,142' stroke-width='1.5'/%3E%3Cpolygon points='100,184 172,58 28,58' stroke-width='1.5'/%3E%3Crect x='52' y='52' width='96' height='96' transform='rotate(45 100 100)' stroke-dasharray='4 2'/%3E%3Ccircle cx='100' cy='100' r='32' stroke-width='2'/%3E%3Ccircle cx='100' cy='100' r='10' fill='%23e5c158'/%3E%3C/g%3E%3C/svg%3E");
+/* Surcharge des couleurs de texte du mode sombre de source.css */
+.theme-dark {
+    --text-primary: hsl(45, 35%, 95%) !important;
+    --text-secondary: hsl(45, 20%, 80%) !important;
+    --text-default: hsl(45, 25%, 90%) !important;
+    --text-muted: hsl(140, 10%, 62%) !important;
+    --channels-default: hsl(45, 18%, 76%) !important;
+    --channel-icon: hsl(45, 45%, 68%) !important;
+    --interactive-normal: hsl(45, 22%, 80%) !important;
+    --interactive-hover: hsl(45, 95%, 72%) !important;
+    --interactive-active: hsl(45, 100%, 85%) !important;
 }
 
 /* ==========================================================================
-   3. ANIMATIONS (Orbe Type 95 & Pulsations Magiques)
+   3. ANIMATIONS MAGIQUES (Orbe d'Élenium Type 95)
    ========================================================================== */
-@keyframes rotateMagicCircle {
+@keyframes rotateType95Circle {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-@keyframes rotateHomeIcon {
+@keyframes rotateHomeOrb {
     0% { transform: rotate(0deg) scale(1); }
-    50% { transform: rotate(180deg) scale(1.08); }
+    50% { transform: rotate(180deg) scale(1.06); }
     100% { transform: rotate(360deg) scale(1); }
 }
 
-@keyframes pulseGoldGlow {
-    0%, 100% { box-shadow: 0 0 8px var(--type95-gold-glow), inset 0 0 5px var(--type95-gold-dim); }
-    50% { box-shadow: 0 0 16px var(--type95-gold), inset 0 0 10px var(--type95-gold-glow); }
-}
-
 /* ==========================================================================
-   4. ARRIÈRE-PLAN GLOBAL & FILIGRANE MAGIQUE
+   4. SURCOUCHE VISUELLE ULTRA POUSSÉE SUR LES ÉLÉMENTS DE SOURCE.CSS
    ========================================================================== */
-body, #app-mount {
-    background: #070a08 !important;
-    font-family: var(--font-primary);
-    letter-spacing: 0.3px;
+
+/* --- CERCLE MAGIQUE TOURNANT DERRIÈRE LE CHAT --- */
+.chat_f75fb0 {
+    position: relative;
+    overflow: hidden;
 }
 
-/* Fond d'écran principal avec filtre tactique */
-#app-mount::before {
+.chat_f75fb0::after {
     content: "";
-    position: fixed;
-    inset: 0;
-    background-image: 
-        radial-gradient(circle at center, transparent 20%, rgba(5, 8, 6, 0.92) 100%),
-        repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.18) 0px, rgba(0, 0, 0, 0.18) 1px, transparent 1px, transparent 3px),
-        var(--tanya-wallpaper);
-    background-size: cover, 100% 3px, cover;
-    background-position: center;
-    filter: brightness(var(--tanya-Filter-Brightness)) contrast(1.15) sepia(0.15);
-    z-index: -2;
-    pointer-events: none;
-}
-
-/* Grand Cercle Magique d'Élenium qui tourne lentement derrière le chat */
-#app-mount::after {
-    content: "";
-    position: fixed;
+    position: absolute;
     top: 50%;
-    left: 55%;
-    width: 580px;
-    height: 580px;
+    left: 50%;
+    width: 520px;
+    height: 520px;
     background-image: var(--magic-circle-svg);
     background-size: contain;
     background-repeat: no-repeat;
-    opacity: 0.07;
-    filter: drop-shadow(0 0 15px var(--type95-gold));
-    animation: rotateMagicCircle 90s linear infinite;
-    z-index: -1;
+    opacity: 0.08;
+    filter: drop-shadow(0 0 18px var(--type95-gold));
+    animation: rotateType95Circle 85s linear infinite;
     pointer-events: none;
+    z-index: 0;
 }
 
-/* Nettoyage des fonds par défaut de Discord */
-[class*="bg_"],
-[class*="app_"],
-[class*="layer_"],
-[class*="standardSidebarView_"] {
-    background: transparent !important;
+/* Assure que les messages restent au-dessus du cercle magique */
+.chatContent_f75fb0,
+.membersWrap_c8ffbb {
+    position: relative;
+    z-index: 1;
 }
 
-/* ==========================================================================
-   5. STRUCTURE EN PANNEAUX TACTIQUES (Glassmorphisme & Bordures d'Or)
-   ========================================================================== */
-/* Barre des serveurs */
-nav[class*="guilds_"] {
-    background: var(--imperial-bg-tertiary) !important;
-    backdrop-filter: blur(var(--tanya-Blur));
-    border-right: 1px solid rgba(229, 193, 88, 0.25);
-    box-shadow: 4px 0 20px rgba(0, 0, 0, 0.6);
+/* --- CADRE TACTIQUE IMPÉRIAL SUR LE CONTENEUR PRINCIPAL --- */
+.content__5e434 {
+    border: 1px solid rgba(229, 193, 88, 0.28) !important;
+    box-shadow: 
+        var(--popout-shadow-border),
+        0 0 25px rgba(0, 0, 0, 0.8),
+        0 0 15px rgba(229, 193, 88, 0.1) !important;
 }
 
-/* Barre des salons (Sidebar) */
-[class*="sidebar_"] {
-    background: var(--imperial-bg-secondary) !important;
-    backdrop-filter: blur(var(--tanya-Blur));
-    margin: 8px 0 8px 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(229, 193, 88, 0.22);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
-    overflow: hidden;
-}
-
-/* Zone principale de Chat */
-main[class*="chatContent_"],
-[class*="chat_"] {
-    background: var(--imperial-bg-dark) !important;
-    backdrop-filter: blur(var(--tanya-Blur));
-}
-
-[class*="chat_"] {
-    margin: 8px;
-    border-radius: 4px;
-    border: 1px solid rgba(229, 193, 88, 0.22);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65);
-    overflow: hidden;
-}
-
-/* En-tête du salon (Header) */
-section[class*="title_"],
-header[class*="header_"] {
-    background: linear-gradient(90deg, rgba(16, 23, 18, 0.9) 0%, rgba(229, 193, 88, 0.1) 50%, rgba(16, 23, 18, 0.9) 100%) !important;
-    border-bottom: 1px solid rgba(229, 193, 88, 0.35) !important;
-    font-family: var(--font-display);
-    text-transform: uppercase;
-    letter-spacing: 1.2px;
-}
-
-/* Liste des membres (à droite) */
-[class*="membersWrap_"],
-[class*="members_"] {
-    background: rgba(12, 16, 13, 0.6) !important;
-    border-left: 1px solid rgba(229, 193, 88, 0.2);
-}
-
-/* ==========================================================================
-   6. BOUTON D'ACCUEIL : ORBE DE CALCUL TYPE 95
-   ========================================================================== */
-/* Cache le logo Discord de base */
+/* --- BOUTON D'ACCUEIL DISCORD : ORBE D'ÉLENIUM TYPE 95 --- */
 [class*="tutorialContainer_"] [class*="childWrapper_"] svg {
     display: none !important;
 }
 
-/* Remplace par le Cercle Magique Doré Animé */
 [class*="tutorialContainer_"] [class*="childWrapper_"] {
-    background-color: rgba(15, 20, 16, 0.9) !important;
+    background-color: rgba(12, 18, 14, 0.9) !important;
     background-image: var(--magic-circle-svg) !important;
-    background-size: 82% !important;
+    background-size: 84% !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
-    border: 1px solid var(--type95-gold);
+    border: 1px solid var(--type95-gold) !important;
     border-radius: 50% !important;
-    box-shadow: 0 0 12px var(--type95-gold-glow);
-    animation: rotateHomeIcon 20s linear infinite;
+    box-shadow: 0 0 14px var(--type95-gold-glow) !important;
+    animation: rotateHomeOrb 18s linear infinite;
     transition: all 0.3s ease;
 }
 
 [class*="tutorialContainer_"]:hover [class*="childWrapper_"] {
-    animation-duration: 4s;
-    box-shadow: 0 0 22px var(--type95-gold-bright), 0 0 8px var(--imperial-crimson-bright);
-    border-color: #fff;
+    animation-duration: 3.5s;
+    border-color: #ffffff !important;
+    box-shadow: 0 0 22px var(--type95-gold-bright), 0 0 10px var(--imperial-crimson) !important;
 }
 
-/* ==========================================================================
-   7. SALONS & CATÉGORIES (Style Grade Militaire)
-   ========================================================================== */
-/* Titres des catégories */
+/* --- EN-TÊTES IMPÉRIAUX (Serveur & Salon) --- */
+.header_f37cb1,
+.container__9293f {
+    font-family: var(--font-display) !important;
+    letter-spacing: 1px;
+    background: linear-gradient(90deg, rgba(229, 193, 88, 0.12) 0%, transparent 60%) !important;
+    border-bottom: 1px solid rgba(229, 193, 88, 0.25) !important;
+}
+
+.header_f37cb1 [class*="name_"],
+.container__9293f [class*="title_"] {
+    color: var(--type95-gold-bright) !important;
+    text-shadow: 0 0 10px rgba(229, 193, 88, 0.35) !important;
+    font-weight: 700 !important;
+}
+
+/* --- SALONS & CATÉGORIES --- */
 [class*="containerDefault_"] [class*="name_"] {
-    font-family: var(--font-display);
+    font-family: var(--font-display) !important;
     color: var(--type95-gold) !important;
+    letter-spacing: 1.4px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    text-shadow: 0 0 6px rgba(229, 193, 88, 0.3);
 }
 
-/* Salons individuels */
-[class*="link_"] {
-    border-radius: 2px !important;
+.sidebar__5e434 .link__2ea32 {
     border-left: 2px solid transparent;
-    transition: all 0.2s ease-in-out;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Survol d'un salon */
-[class*="wrapper_"]:hover [class*="link_"] {
+.sidebar__5e434 .link__2ea32:hover {
     background: linear-gradient(90deg, rgba(229, 193, 88, 0.18) 0%, transparent 100%) !important;
     border-left: 2px solid var(--type95-gold);
     transform: translateX(3px);
 }
 
-/* Salon sélectionné */
-[class*="modeSelected_"] [class*="link_"] {
-    background: linear-gradient(90deg, rgba(229, 193, 88, 0.32) 0%, rgba(158, 27, 27, 0.15) 100%) !important;
-    border-left: 3px solid var(--type95-gold-bright);
-    box-shadow: inset 0 0 12px rgba(229, 193, 88, 0.15);
+[class*="modeSelected_"] .link__2ea32 {
+    background: linear-gradient(90deg, rgba(229, 193, 88, 0.32) 0%, rgba(158, 27, 27, 0.18) 100%) !important;
+    border-left: 3px solid var(--type95-gold-bright) !important;
+    box-shadow: inset 0 0 14px rgba(229, 193, 88, 0.18);
 }
 
-[class*="modeSelected_"] [class*="name_"] {
-    color: var(--type95-gold-bright) !important;
-    font-weight: 700;
-    text-shadow: 0 0 8px var(--type95-gold-glow);
-}
-
-/* Indicateurs de salons non lus (Balles traçantes dorées) */
-[class*="unread_"] {
-    background-color: var(--type95-gold-bright) !important;
-    box-shadow: 0 0 10px var(--type95-gold-bright);
-}
-
-/* ==========================================================================
-   8. MESSAGES, MENTIONS & ZONE DE SAISIE (Télégramme Impérial)
-   ========================================================================== */
-/* Survol d'un message */
-[class*="message_"]:hover {
-    background: linear-gradient(90deg, rgba(229, 193, 88, 0.07) 0%, transparent 90%) !important;
-    border-left: 2px solid rgba(229, 193, 88, 0.5);
-}
-
-/* Noms d'utilisateurs dans le chat */
-[class*="username_"] {
-    font-family: var(--font-display);
-    font-weight: 700 !important;
-    letter-spacing: 0.6px;
-}
-
-/* Horodatage style rapport militaire */
-[class*="timestamp_"] {
-    font-family: var(--font-code) !important;
-    color: var(--type95-gold) !important;
-    opacity: 0.75;
-}
-
-/* Message qui te mentionne (Alerte Rouge Impériale) */
-[class*="mentioned_"] {
-    background: linear-gradient(90deg, rgba(158, 27, 27, 0.35) 0%, rgba(229, 193, 88, 0.08) 100%) !important;
-    border-left: 3px solid var(--imperial-crimson-bright) !important;
-    box-shadow: inset 4px 0 15px rgba(255, 42, 42, 0.15);
-}
-
-[class*="mentioned_"]::before {
-    background-color: var(--imperial-crimson-bright) !important;
-    box-shadow: 0 0 10px var(--imperial-crimson-bright);
-}
-
-/* Blocs de code (Style terminal de décryptage militaire) */
-code, [class*="codeView_"] {
-    font-family: var(--font-code) !important;
-    background: rgba(8, 12, 9, 0.92) !important;
-    border: 1px solid rgba(229, 193, 88, 0.35) !important;
-    border-left: 3px solid var(--type95-gold) !important;
-    color: #dfdbc8 !important;
-    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.8);
-}
-
-/* Citations (Blockquotes) */
-[class*="blockquoteContainer_"] [class*="blockquoteDivider_"] {
-    background-color: var(--type95-gold) !important;
-    box-shadow: 0 0 8px var(--type95-gold-glow);
-}
-
-/* Barre d'écriture (Input de message) */
-[class*="channelTextArea_"] [class*="scrollableContainer_"] {
-    background: rgba(10, 14, 11, 0.88) !important;
+/* --- PANNEAU UTILISATEUR : BADGE DU 203e BATAILLON --- */
+.panels__5e434 {
+    background: linear-gradient(145deg, rgba(14, 20, 16, 0.85) 0%, rgba(8, 12, 9, 0.92) 100%) !important;
     border: 1px solid rgba(229, 193, 88, 0.4) !important;
-    border-radius: 3px !important;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(229, 193, 88, 0.05);
-    transition: all 0.25s ease;
+    overflow: hidden;
 }
 
-[class*="channelTextArea_"]:focus-within [class*="scrollableContainer_"] {
-    border-color: var(--type95-gold-bright) !important;
-    box-shadow: 0 0 15px var(--type95-gold-glow), inset 0 0 8px rgba(229, 193, 88, 0.12);
-}
-
-/* ==========================================================================
-   9. PANNEAU UTILISATEUR (Carte d'Officier Impérial - Bas Gauche)
-   ========================================================================== */
-section[class*="panels_"] {
-    background: linear-gradient(135deg, rgba(18, 25, 20, 0.95) 0%, rgba(10, 13, 11, 0.98) 100%) !important;
-    border: 1px solid var(--type95-gold) !important;
-    border-radius: 3px !important;
-    margin: 6px;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.8), inset 0 0 8px var(--type95-gold-dim);
-    position: relative;
-}
-
-/* Inscription "DIVISION 203" en haut du panneau utilisateur */
-section[class*="panels_"]::before {
-    content: "IMPERIAL MAGE BATTALION // 203RD";
+.panels__5e434::before {
+    content: "IMPERIAL MAGE BATTALION // 203RD — TYPE 95";
     display: block;
     font-family: var(--font-code);
     font-size: 9px;
-    letter-spacing: 2px;
-    color: var(--type95-gold);
-    background: rgba(229, 193, 88, 0.12);
-    padding: 3px 8px;
-    border-bottom: 1px solid rgba(229, 193, 88, 0.25);
+    letter-spacing: 1.8px;
+    color: var(--type95-gold-bright);
+    background: linear-gradient(90deg, rgba(158, 27, 27, 0.45) 0%, rgba(229, 193, 88, 0.2) 50%, rgba(158, 27, 27, 0.45) 100%);
+    padding: 4px 8px;
     text-align: center;
+    border-bottom: 1px solid rgba(229, 193, 88, 0.35);
+    text-shadow: 0 0 6px var(--type95-gold);
 }
 
-/* ==========================================================================
-   10. GROUPES DE MEMBRES, BADGES & BARRES DE DÉFILEMENT
-   ========================================================================== */
-/* Rôles dans la liste des membres */
-[class*="membersGroup_"] {
+/* --- MESSAGES, MENTIONS & TERMINAL DE CODE --- */
+[class*="username_"] {
     font-family: var(--font-display);
+    font-weight: 700 !important;
+    letter-spacing: 0.5px;
+}
+
+[class*="timestamp_"] {
+    font-family: var(--font-code) !important;
     color: var(--type95-gold) !important;
-    letter-spacing: 1.5px;
+}
+
+/* Mentions Rouge Sang Impérial */
+[class*="mentioned_"] {
+    background: linear-gradient(90deg, rgba(180, 20, 20, 0.38) 0%, rgba(229, 193, 88, 0.1) 100%) !important;
+    border-left: 3px solid var(--imperial-crimson) !important;
+    box-shadow: inset 4px 0 18px rgba(255, 42, 42, 0.2) !important;
+}
+
+/* Blocs de code style Télégramme de l'État-Major */
+code, [class*="codeView_"] {
+    font-family: var(--font-code) !important;
+    background: rgba(8, 12, 9, 0.88) !important;
+    border: 1px solid rgba(229, 193, 88, 0.35) !important;
+    border-left: 3px solid var(--type95-gold) !important;
+}
+
+/* --- GROUPES DE MEMBRES (Grades Militaires) --- */
+[class*="membersGroup_"] {
+    font-family: var(--font-display) !important;
+    color: var(--type95-gold-bright) !important;
+    letter-spacing: 1.4px;
     text-transform: uppercase;
     border-bottom: 1px solid rgba(229, 193, 88, 0.25);
     padding-bottom: 4px;
-    margin-top: 12px;
+    margin-inline: 8px;
 }
 
-/* Badges de notification (Mentions rouges incandescentes) */
-[class*="numberBadge_"] {
-    background-color: var(--imperial-crimson-bright) !important;
-    color: #fff !important;
-    font-family: var(--font-code);
-    font-weight: bold;
-    border: 1px solid var(--type95-gold-bright);
-    box-shadow: 0 0 10px var(--imperial-crimson-bright);
+/* --- BARRE DE SAISIE DE MESSAGE --- */
+.channelTextArea__74017 {
+    border: 1px solid rgba(229, 193, 88, 0.32) !important;
 }
 
-/* Popups, Menus déroulants et Modales */
-[class*="menu_"],
-[class*="modal_"],
-[class*="popout_"],
-[class*="userProfileOuter_"] {
-    background: rgba(12, 16, 13, 0.95) !important;
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--type95-gold) !important;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.9), 0 0 15px var(--type95-gold-dim) !important;
-}
-
-/* Boutons standards */
-button[class*="lookFilled_"][class*="colorBrand_"] {
-    background: linear-gradient(135deg, #b38f2d 0%, #e5c158 50%, #9e7b1c 100%) !important;
-    color: #0a0e0c !important;
-    font-family: var(--font-display);
-    font-weight: 800 !important;
-    letter-spacing: 1px;
-    border: 1px solid #fff3c4;
-    box-shadow: 0 0 10px var(--type95-gold-glow);
-    transition: all 0.2s ease;
-}
-
-button[class*="lookFilled_"][class*="colorBrand_"]:hover {
-    filter: brightness(1.2);
-    box-shadow: 0 0 18px var(--type95-gold-bright);
-    transform: translateY(-1px);
-}
-
-/* Barres de défilement (Scrollbars en laiton) */
-::-webkit-scrollbar {
-    width: 6px !important;
-    height: 6px !important;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(8, 11, 9, 0.6) !important;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, var(--type95-gold) 0%, #7a6018 100%) !important;
-    border-radius: 2px !important;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--type95-gold-bright) !important;
-    box-shadow: 0 0 8px var(--type95-gold);
+.channelTextArea__74017:focus-within {
+    border-color: var(--type95-gold-bright) !important;
+    box-shadow: var(--liquid-glass-shadow), 0 0 16px rgba(229, 193, 88, 0.28) !important;
 }
